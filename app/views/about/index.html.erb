@@ -1,1 +1,23 @@
 <h1>Stuff here, testing</h1>
+<div id="visualization"></div>
+
+<%= javascript_include_tag "vis.min.js" %>
+<%= stylesheet_link_tag "vis.min.css" %>
+<script type="text/javascript" >
+    var container = document.getElementById('visualization');
+  var items = [
+    {x: '2014-06-11', y: 10},
+    {x: '2014-06-12', y: 25},
+    {x: '2014-06-13', y: 30},
+    {x: '2014-06-14', y: 10},
+    {x: '2014-06-15', y: 15},
+    {x: '2014-06-16', y: 30}
+  ];
+
+  var dataset = new vis.DataSet(items);
+  var options = {
+    start: '2014-06-10',
+    end: '2014-06-18'
+  };
+  var graph2d = new vis.Graph2d(container, dataset, options);
+</script>
