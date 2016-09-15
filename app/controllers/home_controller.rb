@@ -3,7 +3,7 @@ class HomeController < ApplicationController
   end
 
   def display
-    params[:term1]
-    params[:term2]
+    params[:term1].classify.safe_constantize.all
+    params[:term2].classify.safe_constantize.all
   end
 end
