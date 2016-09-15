@@ -1,5 +1,2 @@
-class Restaurant
-  include Mongoid::Document
-  field :zip
-  field :avg_score
+class Restaurant < ApplicationRecord
 end
