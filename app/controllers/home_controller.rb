@@ -3,7 +3,9 @@ class HomeController < ApplicationController
   end
 
   def display
-    params[:term1].classify.safe_constantize.all
-    params[:term2].classify.safe_constantize.all
+    byebug
+    term1 = (Object.const_get params[:term1]).all
+    term2 = (Object.const_get params[:term2]).all
+    puts term1.inspect
   end
 end
