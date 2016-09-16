@@ -10,18 +10,33 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tipsy/1.0.3/jquery.tipsy.min.js"></script>
 
 <script type="text/javascript">
-var parsedRestData;
+var keys = [
+  "zipcode", 
+  "graffiti_complaints", 
+  "heating_complaints", 
+  "illegal_parking_complaints", 
+  "noise_complaints", 
+  "restaurant_average_score", 
+  "streetlight_complaints",
+  "amount_of_trees"
+]
 
-var data = $.ajax({
-  type: "GET",
-  url: "/assets/master.csv",
-  dataType: "text",
-  success: function(data) {  
-    parsedData = d3.csvParse(data);   
-    buildChart(parsedData);
-    return data;
-  }
-})
+var data = function (n1, n2) {  
+  $.ajax({
+    type: "GET",
+    url: "/assets/master.csv",
+    dataType: "text",
+    success: function(data) {  
+      parsedData = d3.csvParse(data);   
+      firstData = Object.keys(parsedData[0])[n1];
+      secondData = Object.keys(parsedData[0])[n2];
+      debugger
+      buildChart(parsedData, firstData, secondData);
+      return data;
+    }
+  })
+}
+data(2, 7);
 
 // function getSecondDataSet (firstDataset) {
 //   $.ajax({
@@ -37,7 +52,8 @@ var data = $.ajax({
 //   })
 // }
 
-function buildChart (dataset) {
+function buildChart (dataset, firstData, secondData) {
+  debugger;
   //COLORS for circles and triangles
   // template from: http://codepen.io/sasidhar2992/pen/jbgbwV
   var firstColor = "#0B3B6A";
@@ -50,8 +66,8 @@ function buildChart (dataset) {
   dataset.forEach(function(entry) { 
     var tempArray = []; 
     if (entry !== undefined) {
-      tempArray.push(entry.restaurant_average_score);
-      tempArray.push(entry.amount_of_trees)
+      tempArray.push(entry[firstData]);
+      tempArray.push(entry[secondData]);
       tempArray.push(entry.zipcode); 
       stagingData.push(tempArray);
     } 
@@ -78,6 +94,7 @@ function buildChart (dataset) {
     // console.log(tempArray);
     data.push(tempArray);
   });
+  
 
   //Dimensions
   var margin = {
@@ -98,6 +115,14 @@ function buildChart (dataset) {
     return d[1];
   })
 
+  var minX = d3.min(data, function(d) {
+    return d[0];
+  })
+
+  var minY = d3.min(data, function(d) {
+    return d[1];
+  })
+
   var maxValue = 0;
 
   if (maxX > maxY) {
@@ -109,12 +134,11 @@ function buildChart (dataset) {
   //Set X range and domain
     var x = d3.scaleLinear()
       .range([0, width])
-      .domain([0, maxX]);
-
-    //Set Y range and domain
+      .domain([minX, maxX]); 
+  //Set Y range and domain
     var y = d3.scaleLinear()
       .range([height, 0])
-      .domain([0, maxY]);
+      .domain([minY, maxY]);
 
     //Prime axis
     var xAxis = d3.axisBottom(x).ticks(10).tickSize(-height);
@@ -143,9 +167,9 @@ function buildChart (dataset) {
     svg.append("g")
       .attr("class", "x axis ")
       .attr('id', "axis--x")
-      .attr("transform", "translate(0," + height + ")")
+      .attr("transform", "translate(" + minX + "," + height + ")")
       .call(xAxis);
-
+    
     svg.append("g")
       .attr("class", "y axis")
       .attr('id', "axis--y")
@@ -204,13 +228,13 @@ function buildChart (dataset) {
   //Draw the labels
   svg.append("text")
     .attr("text-anchor", "middle")
-    .attr("transform", "translate(-30,300) rotate(-90)")
-    .text(col1);
+    .attr("transform", "translate(300,580)")
+    .text(firstData);
 
   svg.append("text")
     .attr("text-anchor", "middle")
-    .attr("transform", "translate(300,580)")
-    .text(col2);
+    .attr("transform", "translate(-30,300) rotate(-90)")
+    .text(secondData);
 
   //Tipsy, to display the values
   $('svg circle').tipsy({
@@ -220,7 +244,7 @@ function buildChart (dataset) {
     trigger: 'focus',
     title: function() {
       d = this.__data__;
-      return "zipcode: " + d[2] +"<br/>"
+      return firstData + ": " + d[0] + "<br>" + secondData + ": " + d[1] + "<br>zipcode: " + d[2] +"<br/>"
     }
   }); 
 }
