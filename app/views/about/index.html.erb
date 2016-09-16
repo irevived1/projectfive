@@ -11,7 +11,7 @@
 
 
 <meta charset="utf-8">
-<<<<<<< HEAD
+
 <style>
 
 body {
@@ -22,7 +22,7 @@ body {
   fill: steelblue;
 }
 
-.bar text.SCORE {
+.bar text.value {
   fill: black;
 }
 
@@ -48,7 +48,7 @@ body {
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script>
 
-d3.csv("/assets/restaurant_average_score.csv", function(error, data) {
+d3.csv("/assets/streetlight_complaints.csv", function(error, data) {
   if (error) throw error;
 
 
@@ -82,6 +82,7 @@ d3.csv("/assets/restaurant_average_score.csv", function(error, data) {
   // Set the scale domain.
   x.domain([0, d3.max(data, function(d) { return d[value]; })]);
   y.domain(data.map(function(d) { return d[zipcode]; }));
+  var max = d3.max(data, function(d) { return d[value]; });
 
   var bar = svg.selectAll("g.bar")
       .data(data)
@@ -94,8 +95,8 @@ d3.csv("/assets/restaurant_average_score.csv", function(error, data) {
       .attr("height", y.rangeBand());
 
   bar.append("text")
-      .attr("class", value)
-      .attr("x", function(d) { return (x(d[value]) +  (8*count_digit((d[value])))       ); })
+      .attr("class", "value")
+      .attr("x", function(d) { return (x(d[value]) +  (shiftvalue((d[value]),max))   ); })
       .attr("y", y.rangeBand() / 2)
   //shiftvalue(x(d[value]))
       .attr("dx", -3 )
@@ -113,6 +114,5 @@ d3.csv("/assets/restaurant_average_score.csv", function(error, data) {
 });
 
 </script>
-=======
+
 <img src="" alt="" />
->>>>>>> 4b89a7d7184b4ca5ac1e005ad58d5fb0304695aa
