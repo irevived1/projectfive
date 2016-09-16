@@ -7,5 +7,102 @@
   <%#   tmp['y'] = window.restaurant_average_score[prop]; %>
   <%#   items.push(tmp); %>
   <%# } %>
-<div id="visualization"></div>
+<%# <%= javascript_include_tag "https://d3js.org/d3.v4.min.js" %1> %>
 
+
+<meta charset="utf-8">
+<style>
+
+body {
+  font: 10px sans-serif;
+}
+
+.bar rect {
+  fill: steelblue;
+}
+
+.bar text.SCORE {
+  fill: white;
+}
+
+.axis {
+  shape-rendering: crispEdges;
+}
+
+.axis path {
+  fill: none;
+}
+
+.x.axis line {
+  stroke: #fff;
+  stroke-opacity: .8;
+}
+
+.y.axis path {
+  stroke: black;
+}
+
+</style>
+<body>
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script>
+
+var m = [60, 10, 10, 60],
+    w = 800 - m[1] - m[3],
+    h = 3000 - m[0] - m[2];
+
+var format = d3.format(",.0f");
+
+var x = d3.scale.linear().range([0, w]),
+    y = d3.scale.ordinal().rangeRoundBands([0, h], .1);
+
+var xAxis = d3.svg.axis().scale(x).orient("top").tickSize(-h),
+    yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", w + m[1] + m[3])
+    .attr("height", h + m[0] + m[2])
+  .append("g")
+    .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+
+d3.csv("assets/restaurant_average_score.csv", function(error, data) {
+  if (error) throw error;
+
+  // Parse numbers, and sort by SCORE.
+  data.forEach(function(d) { d.SCORE = +d.SCORE; });
+  //data.sort(function(a, b) { return b.SCORE - a.SCORE; });
+  data.sort(function(a, b) { return b.ZIPCODE - a.ZIPCODE; });
+
+  // Set the scale domain.
+  x.domain([0, d3.max(data, function(d) { return d.SCORE; })]);
+  y.domain(data.map(function(d) { return d.ZIPCODE; }));
+
+  var bar = svg.selectAll("g.bar")
+      .data(data)
+    .enter().append("g")
+      .attr("class", "bar")
+      .attr("transform", function(d) { return "translate(0," + y(d.ZIPCODE) + ")"; });
+
+  bar.append("rect")
+      .attr("width", function(d) { return x(d.SCORE); })
+      .attr("height", y.rangeBand());
+
+  bar.append("text")
+      .attr("class", "SCORE")
+      .attr("x", function(d) { return x(d.SCORE); })
+      .attr("y", y.rangeBand() / 2)
+      .attr("dx", -3)
+      .attr("dy", ".35em")
+      .attr("text-anchor", "end")
+      .text(function(d) { return format(d.SCORE); });
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .call(xAxis);
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis);
+});
+
+</script>
