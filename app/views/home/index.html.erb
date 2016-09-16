@@ -46,16 +46,16 @@ function buildChart (dataset1, dataset2) {
   var stagingData = [];
 
   //parse the sample data into the data object D3 expects
-  dataset1.forEach(function(entry, index) {
-    // debugger;
+  dataset1.forEach(function(entry, index) { 
     var tempArray = [];
     if (dataset2[index] !== undefined && entry !== undefined) {
       tempArray.push(entry.avg_score);
       tempArray.push(dataset2[index].count)
       tempArray.push(entry.zip);
+      tempArray.push(dataset2[index].zip); 
       stagingData.push(tempArray);
     }
-  });
+  }); 
 
   //Create object with counted occurences
   var counts = _.countBy(stagingData);
@@ -74,12 +74,12 @@ function buildChart (dataset1, dataset2) {
     var tempArray = [];
     tempArray.push(parseInt(result[0]));
     tempArray.push(parseInt(result[1]));
+    tempArray.push(parseInt(result[2]));
+    tempArray.push(parseInt(result[3]));
     // console.log(tempArray);
     data.push(tempArray);
   });
 
-  //Preview final data before D3 uses it.
-  // console.log(data);
   //Dimensions
   var margin = {
     top: 10,
@@ -213,14 +213,15 @@ function buildChart (dataset1, dataset2) {
     .attr("transform", "translate(300,580)")
     .text(col2);
 
-  //Tipsy
+  //Tipsy, to display the values
   $('svg circle').tipsy({
     fade: true,
     gravity: 'w',
     html: true,
+    trigger: 'focus',
     title: function() {
       d = this.__data__;
-      return col1 + ": " + d[0] + "<br/>" + col2 + ": " + d[1];
+      return col1 + ": " + d[0] + " at zipcode: " + d[2] +"<br/>" + col2 + ": " + d[1] + " at zipcode: " + d[3];
     }
   }); 
 }
