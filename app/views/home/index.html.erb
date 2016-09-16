@@ -1,10 +1,15 @@
-<%= form_tag("/display", method: "post") do %>
-  <%= text_field_tag(:term1) %>
-  <%= text_field_tag(:term2) %>
-  <%= submit_tag("Discover") %>
-<% end %>
+<%# form_tag("/display", method: "post") do %>
+  <%# text_field_tag(:term1) %>
+  <%# text_field_tag(:term2) %>
+  <%# submit_tag("Discover") %>
+<%#end %>
 
-<div class='chart'></div>
+<div align="center">
+  <select name="first"></select>
+  <select name="second"></select>
+
+  <div class='chart'></div>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.15.0/lodash.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tipsy/1.0.3/jquery.tipsy.min.js"></script>
@@ -20,6 +25,9 @@ var keys = [
   "streetlight_complaints",
   "amount_of_trees"
 ]
+keys.forEach(function (key, index) {
+  $('select').append("<option value=" + index + ">" + key + "</option>");
+})
 
 var data = function (n1, n2) {  
   $.ajax({
@@ -30,13 +38,21 @@ var data = function (n1, n2) {
       parsedData = d3.csvParse(data);   
       firstData = Object.keys(parsedData[0])[n1];
       secondData = Object.keys(parsedData[0])[n2];
-      debugger
+      // debugger
       buildChart(parsedData, firstData, secondData);
       return data;
     }
   })
 }
-data(2, 7);
+// data(5, 7);
+
+$('select').change(function () {
+  // debugger;
+  d3.select('svg').remove();
+  var first = $('select')[0].value;
+  var second  = $('select')[1].value;
+  data(first, second);
+})
 
 // function getSecondDataSet (firstDataset) {
 //   $.ajax({
@@ -53,7 +69,7 @@ data(2, 7);
 // }
 
 function buildChart (dataset, firstData, secondData) {
-  debugger;
+  // debugger;
   //COLORS for circles and triangles
   // template from: http://codepen.io/sasidhar2992/pen/jbgbwV
   var firstColor = "#0B3B6A";
@@ -145,6 +161,7 @@ function buildChart (dataset, firstData, secondData) {
     var yAxis = d3.axisLeft(y).ticks(10 * height / width).tickSize(-width);
 
     //Draw the shell
+    // $('.chart').children().hide();
     var svg = d3.select(".chart").append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
