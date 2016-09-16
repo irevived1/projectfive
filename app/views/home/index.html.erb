@@ -12,31 +12,32 @@
 <script type="text/javascript">
 var parsedRestData;
 
-var restaurantData = $.ajax({
+var data = $.ajax({
   type: "GET",
-  url: "/assets/restaurant_average_score.csv",
+  url: "/assets/master.csv",
   dataType: "text",
-  success: function(data) { 
-    parsedData = d3.csvParse(data); 
-    getSecondDataSet(parsedData); 
+  success: function(data) {  
+    parsedData = d3.csvParse(data);   
+    buildChart(parsedData);
     return data;
   }
 })
 
-function getSecondDataSet (firstDataset) {
-  $.ajax({
-    type: "GET",
-    url: "/assets/noise_complaints.csv",
-    dataType: "text",
-    success: function(data) { 
-      parsedData = d3.csvParse(data); 
-      buildChart(firstDataset, parsedData);
-      return data;
-    }
-  })
-}
+// function getSecondDataSet (firstDataset) {
+//   $.ajax({
+//     type: "GET",
+//     url: "/assets/noise_complaints.csv",
+//     dataType: "text",
+//     success: function(data) { 
+//       debugger;
+//       parsedData = d3.csvParse(data); 
+//       buildChart(firstDataset, parsedData);
+//       return data;
+//     }
+//   })
+// }
 
-function buildChart (dataset1, dataset2) {
+function buildChart (dataset) {
   //COLORS for circles and triangles
   // template from: http://codepen.io/sasidhar2992/pen/jbgbwV
   var firstColor = "#0B3B6A";
@@ -46,15 +47,14 @@ function buildChart (dataset1, dataset2) {
   var stagingData = [];
 
   //parse the sample data into the data object D3 expects
-  dataset1.forEach(function(entry, index) { 
-    var tempArray = [];
-    if (dataset2[index] !== undefined && entry !== undefined) {
-      tempArray.push(entry.avg_score);
-      tempArray.push(dataset2[index].count)
-      tempArray.push(entry.zip);
-      tempArray.push(dataset2[index].zip); 
+  dataset.forEach(function(entry) { 
+    var tempArray = []; 
+    if (entry !== undefined) {
+      tempArray.push(entry.restaurant_average_score);
+      tempArray.push(entry.amount_of_trees)
+      tempArray.push(entry.zipcode); 
       stagingData.push(tempArray);
-    }
+    } 
   }); 
 
   //Create object with counted occurences
@@ -74,8 +74,7 @@ function buildChart (dataset1, dataset2) {
     var tempArray = [];
     tempArray.push(parseInt(result[0]));
     tempArray.push(parseInt(result[1]));
-    tempArray.push(parseInt(result[2]));
-    tempArray.push(parseInt(result[3]));
+    tempArray.push(parseInt(result[2])); 
     // console.log(tempArray);
     data.push(tempArray);
   });
@@ -200,8 +199,8 @@ function buildChart (dataset1, dataset2) {
   // .attr("stroke-width", 1)
   // .attr("stroke", "silver");
 
-  var col1 = Object.keys(dataset1[0])[1]; 
-  var col2 = Object.keys(dataset2[0])[1];
+  var col1 = Object.keys(dataset[0])[1]; 
+  var col2 = Object.keys(dataset[0])[1];
   //Draw the labels
   svg.append("text")
     .attr("text-anchor", "middle")
@@ -221,7 +220,7 @@ function buildChart (dataset1, dataset2) {
     trigger: 'focus',
     title: function() {
       d = this.__data__;
-      return col1 + ": " + d[0] + " at zipcode: " + d[2] +"<br/>" + col2 + ": " + d[1] + " at zipcode: " + d[3];
+      return "zipcode: " + d[2] +"<br/>"
     }
   }); 
 }
