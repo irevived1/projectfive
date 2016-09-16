@@ -1,18 +1,9 @@
-require 'byebug'
 require 'csv'
 
 module CsvHelper
 
   def all_zips
     csvs = Dir.entries('app/assets/csv').select{|x| x.length > 3}
-
-    # 1. graffiti
-    # 2. heating
-    # 3. illegal
-    # 4. noise
-    # 5. restaurant
-    # 6. streetlight
-    # 7. trees
 
     master_hash = {}
 
