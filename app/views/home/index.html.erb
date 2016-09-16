@@ -10,6 +10,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tipsy/1.0.3/jquery.tipsy.min.js"></script>
 
 <script type="text/javascript">
+var parsedRestData;
+
+var restaurantData = $.ajax({
+  type: "GET",
+  url: "/assets/restaurant_average_score.csv",
+  dataType: "text",
+  success: function(data) { 
+    parsedRestData = d3.csvParse(data);
+    return data;
+  }
+})
+
 var originalData = [{
   "id": 1,
   "week": 1,
@@ -154,12 +166,12 @@ _.forOwn(counts, function(value, key) {
   var tempArray = [];
   tempArray.push(parseInt(result[0]));
   tempArray.push(parseInt(result[1]));
-  console.log(tempArray);
+  // console.log(tempArray);
   data.push(tempArray);
 });
 
 //Preview final data before D3 uses it.
-console.log(data);
+// console.log(data);
 //Dimensions
 var margin = {
   top: 10,
@@ -209,16 +221,16 @@ if (maxX > maxY) {
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
   //Draw triangles
-  var cowboysTrianglePoints = "0 " + height + ", " + height + " 0, " + height + " " + height;
-  var opponentTrianglePoints = "0 0, 0 " + height + ", " + height + " 0";
-
-  svg.append('polyline')
-  .attr('points', cowboysTrianglePoints)
-  .style('fill', cowBackColor);
-
-  svg.append('polyline')
-  .attr('points', opponentTrianglePoints)
-  .style('fill', oppBackColor);
+  // var cowboysTrianglePoints = "0 " + height + ", " + height + " 0, " + height + " " + height;
+  // var opponentTrianglePoints = "0 0, 0 " + height + ", " + height + " 0";
+  //
+  // svg.append('polyline')
+  // .attr('points', cowboysTrianglePoints)
+  // .style('fill', cowBackColor);
+  //
+  // svg.append('polyline')
+  // .attr('points', opponentTrianglePoints)
+  // .style('fill', oppBackColor);
 
   //Draw the axis
   svg.append("g")
@@ -272,24 +284,24 @@ d3.selectAll("circle")
 })
 
 //Draw the diagonal
-svg.append("line")
-.attr("x1", height)
-.attr("y1", 0)
-.attr("x2", 0)
-.attr("y2", height)
-.attr("stroke-width", 1)
-.attr("stroke", "silver");
+// svg.append("line")
+// .attr("x1", height)
+// .attr("y1", 0)
+// .attr("x2", 0)
+// .attr("y2", height)
+// .attr("stroke-width", 1)
+// .attr("stroke", "silver");
 
 //Draw the labels
 svg.append("text")
 .attr("text-anchor", "middle")
 .attr("transform", "translate(-30,300) rotate(-90)")
-.text("Eagles");
+.text("Dataset 1");
 
 svg.append("text")
 .attr("text-anchor", "middle")
 .attr("transform", "translate(300,580)")
-.text("Cowboys");
+.text("Dataset 2");
 
 //Tipsy
 $('svg circle').tipsy({

@@ -2,7 +2,7 @@ $(document).ready(function() {
   window.restaurant_average_score = {};
   $.ajax({
       type: "GET",
-      url: "assets/restaurant_average_score.csv",
+      url: "/assets/restaurant_average_score.csv",
       dataType: "text",
       success: function(data) {processData(data);}
    });
