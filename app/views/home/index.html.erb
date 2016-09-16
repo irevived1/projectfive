@@ -156,32 +156,32 @@ function buildChart (dataset1, dataset2) {
     //Draw the dots
   var r = d3.scaleLinear()
     //Range for dot sizes
-  .range([5, 20])
+    .range([5, 20])
     //Set the domain from data values
     .domain([1, highestCount]);
 
     svg.selectAll(".dot")
-  .data(data)
-    .enter().append("circle")
-    .attr("class", "dot")
-    .attr("r", function(d) {
-      var thisCount = counts[d[0] + "," + d[1]];
-      return r(parseInt(thisCount));
+      .data(data)
+      .enter().append("circle")
+      .attr("class", "dot")
+      .attr("r", function(d) {
+	var thisCount = counts[d[0] + "," + d[1]];
+	return r(parseInt(thisCount));
+      })
+    .attr("cx", function(d) {
+      return x(parseInt(d[0]));
     })
-  .attr("cx", function(d) {
-    return x(parseInt(d[0]));
-  })
-  .attr("cy", function(d) {
-    return y(parseInt(d[1]));
-  })
-  .attr("opacity", .5)
-  .style("fill", function(d) {
-    if (d[0] > d[1]) {
-      return cowColor;
-    } else {
-      return oppColor;
-    }
-  });
+    .attr("cy", function(d) {
+      return y(parseInt(d[1]));
+    })
+    .attr("opacity", .5)
+    .style("fill", function(d) {
+      if (d[0] > d[1]) {
+	return cowColor;
+      } else {
+	return oppColor;
+      }
+    });
 
   //Set small dots on top of big ones
   d3.selectAll("circle")
@@ -216,11 +216,7 @@ function buildChart (dataset1, dataset2) {
 
   //Tipsy
   var col1 = Object.keys(dataset1[0])[1]; 
-  var col2 = Object.keys(dataset2[0])[1];
-  debugger;  
- 
-
-
+  var col2 = Object.keys(dataset2[0])[1]; 
 
   $('svg circle').tipsy({
     fade: true,
@@ -230,34 +226,6 @@ function buildChart (dataset1, dataset2) {
       d = this.__data__;
       return col1 + ": " + d[0] + "<br/>" + col2 + ": " + d[1];
     }
-  });
-  // var w = 500;
-  // var h = 200;
-  //
-  // var data = [
-  //   {"zip":10001, "count":2000},
-  //   {"zip":10017, "count":3629},
-  //   {"zip":10011, "count":1874},
-  //   {"zip":10013, "count":5432},
-  //   {"zip":12171, "count":7834},
-  //   {"zip":12152, "count":4274},
-  // ]
-  //
-  // d3.select("body").append("svg").attr({width: w, height: h}).selectAll("circle")
-  //   .data(data)
-  // .enter()
-  //   .append("circle")
-  // .attr({
-  //   cx: function (d) { return d.zip },
-  //   cy: function (d) {return h-d.count },
-  //   r: 5,
-  //   "fill": "blue"
-  // })
-
-  // d3.select("body")
-  //   .selectAll("p")
-  //   .data([4, 8, 15, 16, 23, 42])
-  //   .enter().append("p")
-  //     .text(function(d) { return "I’m number " + d + "!"; });
+  }); 
 }
 </script>
