@@ -1,4 +1,5 @@
 require 'matrix'
+# A class for single variable prediction
 
 class UniPre 
 	attr_accessor :x, :y, :theta
