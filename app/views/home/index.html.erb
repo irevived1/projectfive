@@ -3,3 +3,330 @@
   <%= text_field_tag(:term2) %>
   <%= submit_tag("Discover") %>
 <% end %>
+
+<div class='chart'></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.15.0/lodash.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tipsy/1.0.3/jquery.tipsy.min.js"></script>
+
+<script type="text/javascript">
+var originalData = [{
+  "id": 1,
+  "week": 1,
+  "cowscore": 14,
+  "oppscore": 6,
+  "comment": "This is a test comment about how awesome my picks are."
+}, {
+  "id": 2,
+  "week": 1,
+  "cowscore": 21,
+  "oppscore": 18,
+  "comment": "This is another comment about Dez Bryant."
+}, {
+  "id": 3,
+  "week": 1,
+  "cowscore": 27,
+  "oppscore": 26,
+  "comment": "Bogus entry 1."
+}, {
+  "id": 4,
+  "week": 1,
+  "cowscore": 20,
+  "oppscore": 10,
+  "comment": "Bogus entry 2."
+}, {
+  "id": 5,
+  "week": 1,
+  "cowscore": 28,
+  "oppscore": 39,
+  "comment": "Bogus entry 3."
+}, {
+  "id": 6,
+  "week": 1,
+  "cowscore": 20,
+  "oppscore": 26,
+  "comment": "Bogus entry 4."
+}, {
+  "id": 7,
+  "week": 1,
+  "cowscore": 6,
+  "oppscore": 30,
+  "comment": "Bogus entry 5."
+}, {
+  "id": 8,
+  "week": 1,
+  "cowscore": 20,
+  "oppscore": 27,
+  "comment": "Bogus entry 6."
+}, {
+  "id": 8,
+  "week": 1,
+  "cowscore": 20,
+  "oppscore": 27,
+  "comment": "Bogus entry 6a."
+}, {
+  "id": 8,
+  "week": 1,
+  "cowscore": 20,
+  "oppscore": 27,
+  "comment": "Bogus entry 6b."
+}, {
+  "id": 9,
+  "week": 1,
+  "cowscore": 12,
+  "oppscore": 13,
+  "comment": "Bogus entry 7."
+}, {
+  "id": 10,
+  "week": 1,
+  "cowscore": 27,
+  "oppscore": 33,
+  "comment": "Bogus entry 8."
+}, {
+  "id": 11,
+  "week": 1,
+  "cowscore": 6,
+  "oppscore": 10,
+  "comment": "Bogus entry 9."
+}, {
+  "id": 12,
+  "week": 1,
+  "cowscore": 24,
+  "oppscore": 14,
+  "comment": "Bogus entry 10."
+}, {
+  "id": 13,
+  "week": 1,
+  "cowscore": 14,
+  "oppscore": 33,
+  "comment": "Bogus entry 11."
+}, {
+  "id": 13,
+  "week": 1,
+  "cowscore": 14,
+  "oppscore": 33,
+  "comment": "Bogus entry 11b."
+}, {
+  "id": 14,
+  "week": 1,
+  "cowscore": 19,
+  "oppscore": 16,
+  "comment": "Bogus entry 12."
+}, {
+  "id": 14,
+  "week": 1,
+  "cowscore": 19,
+  "oppscore": 16,
+  "comment": "Bogus entry 12a."
+}]
+
+//COLORS for circles and triangles
+var cowColor = "#0B3B6A";
+var cowBackColor = "#D9DCDE";
+var oppColor = "#004A53";
+var oppBackColor = "whitesmoke";
+
+//data object to hold parsed data
+var stagingData = [];
+
+//parse the sample data into the data object D3 expects
+originalData.forEach(function(entry) {
+  var tempArray = [];
+  tempArray.push(entry.cowscore);
+  tempArray.push(entry.oppscore);
+  stagingData.push(tempArray);
+});
+
+//Create object with counted occurences
+var counts = _.countBy(stagingData);
+//Sort that object's counts and reverse to get highest at 0
+var sorted = _.sortBy(counts).reverse();
+//The highest count
+var highestCount = sorted[0];
+
+//This is going to be the data that d3 uses after we do stuff to get it right
+var data = [];
+
+//Avoid duplicate entries by looping through counts instead
+//of originalData. Go through each count and get the values from the keys
+_.forOwn(counts, function(value, key) {
+  var result = key.split(",");
+  var tempArray = [];
+  tempArray.push(parseInt(result[0]));
+  tempArray.push(parseInt(result[1]));
+  console.log(tempArray);
+  data.push(tempArray);
+});
+
+//Preview final data before D3 uses it.
+console.log(data);
+//Dimensions
+var margin = {
+  top: 10,
+  right: 10,
+  bottom: 50,
+  left: 50
+};
+var width = 800 - margin.left - margin.right;
+var height = 600 - margin.top - margin.bottom;
+
+//Get and set maxValue
+var maxX = d3.max(data, function(d) {
+  return d[0];
+})
+
+var maxY = d3.max(data, function(d) {
+  return d[1];
+})
+
+var maxValue = 0;
+
+if (maxX > maxY) {
+  maxValue = maxX;
+} else {
+  maxValue = maxY;
+}
+
+//Set X range and domain
+  var x = d3.scaleLinear()
+.range([0, width])
+  .domain([0, maxValue]);
+
+  //Set Y range and domain
+  var y = d3.scaleLinear()
+.range([height, 0])
+  .domain([0, maxValue]);
+
+  //Prime axis
+  var xAxis = d3.axisBottom(x).ticks(10).tickSize(-height);
+  var yAxis = d3.axisLeft(y).ticks(10 * height / width).tickSize(-width);
+
+  //Draw the shell
+  var svg = d3.select(".chart").append("svg")
+  .attr("width", width + margin.left + margin.right)
+  .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  //Draw triangles
+  var cowboysTrianglePoints = "0 " + height + ", " + height + " 0, " + height + " " + height;
+  var opponentTrianglePoints = "0 0, 0 " + height + ", " + height + " 0";
+
+  svg.append('polyline')
+  .attr('points', cowboysTrianglePoints)
+  .style('fill', cowBackColor);
+
+  svg.append('polyline')
+  .attr('points', opponentTrianglePoints)
+  .style('fill', oppBackColor);
+
+  //Draw the axis
+  svg.append("g")
+  .attr("class", "x axis ")
+  .attr('id', "axis--x")
+  .attr("transform", "translate(0," + height + ")")
+  .call(xAxis);
+
+  svg.append("g")
+  .attr("class", "y axis")
+  .attr('id', "axis--y")
+  .call(yAxis);
+
+  //Draw the dots
+var r = d3.scaleLinear()
+  //Range for dot sizes
+.range([5, 20])
+  //Set the domain from data values
+  .domain([1, highestCount]);
+
+  svg.selectAll(".dot")
+.data(data)
+  .enter().append("circle")
+  .attr("class", "dot")
+  .attr("r", function(d) {
+    var thisCount = counts[d[0] + "," + d[1]];
+    return r(parseInt(thisCount));
+  })
+.attr("cx", function(d) {
+  return x(parseInt(d[0]));
+})
+.attr("cy", function(d) {
+  return y(parseInt(d[1]));
+})
+.attr("opacity", .5)
+.style("fill", function(d) {
+  if (d[0] > d[1]) {
+    return cowColor;
+  } else {
+    return oppColor;
+  }
+});
+
+//Set small dots on top of big ones
+d3.selectAll("circle")
+.each(function(d) {
+  var rad =  parseInt(d3.select(this).attr("r"));
+  if (rad < 10) {
+    this.parentElement.appendChild(this);
+  }
+})
+
+//Draw the diagonal
+svg.append("line")
+.attr("x1", height)
+.attr("y1", 0)
+.attr("x2", 0)
+.attr("y2", height)
+.attr("stroke-width", 1)
+.attr("stroke", "silver");
+
+//Draw the labels
+svg.append("text")
+.attr("text-anchor", "middle")
+.attr("transform", "translate(-30,300) rotate(-90)")
+.text("Eagles");
+
+svg.append("text")
+.attr("text-anchor", "middle")
+.attr("transform", "translate(300,580)")
+.text("Cowboys");
+
+//Tipsy
+$('svg circle').tipsy({
+  fade: true,
+  gravity: 'w',
+  html: true,
+  title: function() {
+    d = this.__data__;
+    return "Cowboys: " + d[0] + "<br/>Eagles: " + d[1];
+  }
+});
+// var w = 500;
+// var h = 200;
+//
+// var data = [
+//   {"zip":10001, "count":2000},
+//   {"zip":10017, "count":3629},
+//   {"zip":10011, "count":1874},
+//   {"zip":10013, "count":5432},
+//   {"zip":12171, "count":7834},
+//   {"zip":12152, "count":4274},
+// ]
+//
+// d3.select("body").append("svg").attr({width: w, height: h}).selectAll("circle")
+//   .data(data)
+// .enter()
+//   .append("circle")
+// .attr({
+//   cx: function (d) { return d.zip },
+//   cy: function (d) {return h-d.count },
+//   r: 5,
+//   "fill": "blue"
+// })
+
+// d3.select("body")
+//   .selectAll("p")
+//   .data([4, 8, 15, 16, 23, 42])
+//   .enter().append("p")
+//     .text(function(d) { return "I’m number " + d + "!"; });
+</script>
