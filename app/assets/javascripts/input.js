@@ -1,7 +1,13 @@
-function shiftvalue(input) {
-  var length = count_digit(input);
-  length = length + Math.floor((length-1)/3);
-  return length;
+function shiftvalue(input,max) {
+  // var length = count_digit(input);
+  // length = length + Math.floor((length-1)/3);
+  // return length;
+  if (input > (max/2) ) {
+    return 0;
+  }
+  else {
+    return (8*count_digit(input));
+  }
 }
 
 function count_digit(input) {
