@@ -40,9 +40,7 @@ function buildChart (dataset1, dataset2) {
   //COLORS for circles and triangles
   // template from: http://codepen.io/sasidhar2992/pen/jbgbwV
   var firstColor = "#0B3B6A";
-  var cowBackColor = "#D9DCDE";
-  var secondColor = "#004A53";
-  var oppBackColor = "whitesmoke";
+  var secondColor = "#004A53"; 
 
   //data object to hold parsed data
   var stagingData = [];
@@ -131,16 +129,16 @@ function buildChart (dataset1, dataset2) {
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     //Draw triangles
-    // var cowboysTrianglePoints = "0 " + height + ", " + height + " 0, " + height + " " + height;
-    // var opponentTrianglePoints = "0 0, 0 " + height + ", " + height + " 0";
+    // var trianglePoints = "0 " + height + ", " + height + " 0, " + height + " " + height;
+    // var secondTrianglePoints = "0 0, 0 " + height + ", " + height + " 0";
     //
     // svg.append('polyline')
-    // .attr('points', cowboysTrianglePoints)
-    // .style('fill', cowBackColor);
+    // .attr('points', trianglePoints)
+    // .style('fill', #000000);
     //
     // svg.append('polyline')
-    // .attr('points', opponentTrianglePoints)
-    // .style('fill', oppBackColor);
+    // .attr('points', secondTrianglePoints)
+    // .style('fill', #808080);
 
     //Draw the axis
     svg.append("g")
