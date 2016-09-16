@@ -27,6 +27,8 @@
 </form>
 
 
+<%= button_to "Refresh",  { controller: "about",action: "index"}, method: :get, data: { confirm: "Are you sure?" } %>
+
 <meta charset="utf-8">
 
 <style>
