@@ -24,4 +24,8 @@ class HomeController < ApplicationController
     render 'chloropleth'
   end
 
+  def linechart
+    
+  end
+
 end

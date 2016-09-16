@@ -14,6 +14,5 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree ../../../vendor/assets/javascripts/.
-//= require linechart/normalLineChart
 //= require_tree .
 
