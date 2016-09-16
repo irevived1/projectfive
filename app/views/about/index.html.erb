@@ -22,7 +22,7 @@ body {
 }
 
 .bar text.SCORE {
-  fill: white;
+  fill: black;
 }
 
 .axis {
@@ -47,54 +47,60 @@ body {
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script>
 
-var m = [60, 10, 10, 60],
-    w = 800 - m[1] - m[3],
-    h = 3000 - m[0] - m[2];
-
-var format = d3.format(",.0f");
-
-var x = d3.scale.linear().range([0, w]),
-    y = d3.scale.ordinal().rangeRoundBands([0, h], .1);
-
-var xAxis = d3.svg.axis().scale(x).orient("top").tickSize(-h),
-    yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0);
-
-var svg = d3.select("body").append("svg")
-    .attr("width", w + m[1] + m[3])
-    .attr("height", h + m[0] + m[2])
-  .append("g")
-    .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
-
-d3.csv("assets/restaurant_average_score.csv", function(error, data) {
+d3.csv("/assets/restaurant_average_score.csv", function(error, data) {
   if (error) throw error;
 
+
+  var tmp = Object.keys(data[0])
+  var zipcode = tmp[0]
+  var value=tmp[1]
+
+  var m = [60, 10, 10, 60],
+      w = 800 - m[1] - m[3],
+      h = (15*data.length) - m[0] - m[2];
+
+  var format = d3.format(",.0f");
+
+  var x = d3.scale.linear().range([0, w]),
+      y = d3.scale.ordinal().rangeRoundBands([0, h], .1);
+
+  var xAxis = d3.svg.axis().scale(x).orient("top").tickSize(-h),
+      yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0);
+
+  var svg = d3.select("body").append("svg")
+      .attr("width", w + m[1] + m[3])
+      .attr("height", h + m[0] + m[2])
+    .append("g")
+      .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+
   // Parse numbers, and sort by SCORE.
-  data.forEach(function(d) { d.SCORE = +d.SCORE; });
+  data.forEach(function(d) { d[value] = +d[value]; });
   //data.sort(function(a, b) { return b.SCORE - a.SCORE; });
-  data.sort(function(a, b) { return b.ZIPCODE - a.ZIPCODE; });
+  data.sort(function(a, b) { return b[zipcode] - a[zipcode]; });
 
   // Set the scale domain.
-  x.domain([0, d3.max(data, function(d) { return d.SCORE; })]);
-  y.domain(data.map(function(d) { return d.ZIPCODE; }));
+  x.domain([0, d3.max(data, function(d) { return d[value]; })]);
+  y.domain(data.map(function(d) { return d[zipcode]; }));
 
   var bar = svg.selectAll("g.bar")
       .data(data)
     .enter().append("g")
       .attr("class", "bar")
-      .attr("transform", function(d) { return "translate(0," + y(d.ZIPCODE) + ")"; });
+      .attr("transform", function(d) { return "translate(0," + y(d[zipcode]) + ")"; });
 
   bar.append("rect")
-      .attr("width", function(d) { return x(d.SCORE); })
+      .attr("width", function(d) { return x(d[value]); })
       .attr("height", y.rangeBand());
 
   bar.append("text")
-      .attr("class", "SCORE")
-      .attr("x", function(d) { return x(d.SCORE); })
+      .attr("class", value)
+      .attr("x", function(d) { return (x(d[value]) +  (8*count_digit((d[value])))       ); })
       .attr("y", y.rangeBand() / 2)
-      .attr("dx", -3)
+  //shiftvalue(x(d[value]))
+      .attr("dx", -3 )
       .attr("dy", ".35em")
       .attr("text-anchor", "end")
-      .text(function(d) { return format(d.SCORE); });
+      .text(function(d) { return format(d[value]); });
 
   svg.append("g")
       .attr("class", "x axis")
