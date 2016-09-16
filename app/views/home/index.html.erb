@@ -7,7 +7,6 @@
 <div align="center">
   <select name="first"></select>
   <select name="second"></select>
-
   <div class='chart'></div>
 </div>
 
@@ -168,17 +167,17 @@ function buildChart (dataset, firstData, secondData) {
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    //Draw triangles
-    // var trianglePoints = "0 " + height + ", " + height + " 0, " + height + " " + height;
-    // var secondTrianglePoints = "0 0, 0 " + height + ", " + height + " 0";
-    //
+    // Draw triangles
+    var trianglePoints = "0 " + height + ", " + height + " 0, " + height + " " + height;
+    var secondTrianglePoints = "0 0, 0 " + height + ", " + height + " 0";
+
     // svg.append('polyline')
     // .attr('points', trianglePoints)
-    // .style('fill', #000000);
-    //
+    // .style('fill', '#000000');
+
     // svg.append('polyline')
     // .attr('points', secondTrianglePoints)
-    // .style('fill', #808080);
+    // .style('fill', '#808080');
 
     //Draw the axis
     svg.append("g")
