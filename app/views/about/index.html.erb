@@ -9,7 +9,22 @@
   <%# } %>
 <%# <%= javascript_include_tag "https://d3js.org/d3.v4.min.js" %1> %>
 
+<form id="form1">
+  <select name="fname">
+    <option value="">Graffiti Complaints</option>
+    <option value="">Heating Complaints</option>
+    <option value="">Illegal Parking Complaints</option>
+    <option value="">Noise Complaints</option>
+    <option value="">Restaurant Average Score</option>
+    <option value="">Streetlight Complaints</option>
+    <option value="">Amount Of Trees</option>
+  </select>
+  <button type="submit" form="form1" value="Submit">Submit</button>
+</form>
 
+
+<div id="insertyourtitlehere"></div>
+<div id="zipcode"></div>
 <meta charset="utf-8">
 
 <style>
@@ -35,7 +50,7 @@ body {
 }
 
 .x.axis line {
-  stroke: #fff;
+  stroke: #fff; 
   stroke-opacity: .8;
 }
 
@@ -48,13 +63,20 @@ body {
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script>
 
-d3.csv("/assets/streetlight_complaints.csv", function(error, data) {
-  if (error) throw error;
 
+
+$('form button').click(function(e) {
+d3.select("svg").remove();
+d3.csv("/assets/master.csv", function(error, data) {
+  if (error) throw error;
 
   var tmp = Object.keys(data[0])
   var zipcode = tmp[0]
-  var value=tmp[1]
+  var gname = graphChanger($('form option:selected').html());
+  var value=tmp[gname == undefined ? 1 : gname];
+  var name_of_column = value.replace(/_/g," ");
+  $('#insertyourtitlehere').html(name_of_column.toUpperCase());
+  $('#zipcode').html(tmp[0].toUpperCase()).css('transform', 'rotate(90deg)');
 
   var m = [60, 10, 10, 60],
       w = 800 - m[1] - m[3],
@@ -111,6 +133,8 @@ d3.csv("/assets/streetlight_complaints.csv", function(error, data) {
   svg.append("g")
       .attr("class", "y axis")
       .call(yAxis);
+});
+e.preventDefault();
 });
 
 </script>

@@ -14,6 +14,19 @@ function count_digit(input) {
   return String(input).length;
 }
 
+function graphChanger(input) {
+  hash = {
+    "Graffiti Complaints":1,
+    "Heating Complaints":2,
+    "Illegal Parking Complaints":3,
+    "Noise Complaints":4,
+    "Restaurant Average Score":5,
+    "Streetlight Complaints":6,
+    "Amount Of Trees":7
+  };
+  return hash[input];
+}
+
 // $(document).ready(function() {
 //   window.restaurant_average_score = {};
 //   $.ajax({
