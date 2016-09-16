@@ -12,7 +12,7 @@ class UniPre
 		r = a.map do |e|
 			ea = [e]
 		end
-		self.x = Matrix.rows(r)  #[[1], [2]]
+		self.x = Matrix.rows(r) 
 	end
 
 	def h(target, theta0=0)  # should use optimal value for theta0
