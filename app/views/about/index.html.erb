@@ -11,4 +11,108 @@
 
 
 <meta charset="utf-8">
+<<<<<<< HEAD
+<style>
+
+body {
+  font: 10px sans-serif;
+}
+
+.bar rect {
+  fill: steelblue;
+}
+
+.bar text.SCORE {
+  fill: black;
+}
+
+.axis {
+  shape-rendering: crispEdges;
+}
+
+.axis path {
+  fill: none;
+}
+
+.x.axis line {
+  stroke: #fff;
+  stroke-opacity: .8;
+}
+
+.y.axis path {
+  stroke: black;
+}
+
+</style>
+<body>
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script>
+
+d3.csv("/assets/restaurant_average_score.csv", function(error, data) {
+  if (error) throw error;
+
+
+  var tmp = Object.keys(data[0])
+  var zipcode = tmp[0]
+  var value=tmp[1]
+
+  var m = [60, 10, 10, 60],
+      w = 800 - m[1] - m[3],
+      h = (15*data.length) - m[0] - m[2];
+
+  var format = d3.format(",.0f");
+
+  var x = d3.scale.linear().range([0, w]),
+      y = d3.scale.ordinal().rangeRoundBands([0, h], .1);
+
+  var xAxis = d3.svg.axis().scale(x).orient("top").tickSize(-h),
+      yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0);
+
+  var svg = d3.select("body").append("svg")
+      .attr("width", w + m[1] + m[3])
+      .attr("height", h + m[0] + m[2])
+    .append("g")
+      .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+
+  // Parse numbers, and sort by SCORE.
+  data.forEach(function(d) { d[value] = +d[value]; });
+  //data.sort(function(a, b) { return b.SCORE - a.SCORE; });
+  data.sort(function(a, b) { return b[zipcode] - a[zipcode]; });
+
+  // Set the scale domain.
+  x.domain([0, d3.max(data, function(d) { return d[value]; })]);
+  y.domain(data.map(function(d) { return d[zipcode]; }));
+
+  var bar = svg.selectAll("g.bar")
+      .data(data)
+    .enter().append("g")
+      .attr("class", "bar")
+      .attr("transform", function(d) { return "translate(0," + y(d[zipcode]) + ")"; });
+
+  bar.append("rect")
+      .attr("width", function(d) { return x(d[value]); })
+      .attr("height", y.rangeBand());
+
+  bar.append("text")
+      .attr("class", value)
+      .attr("x", function(d) { return (x(d[value]) +  (8*count_digit((d[value])))       ); })
+      .attr("y", y.rangeBand() / 2)
+  //shiftvalue(x(d[value]))
+      .attr("dx", -3 )
+      .attr("dy", ".35em")
+      .attr("text-anchor", "end")
+      .text(function(d) { return format(d[value]); });
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .call(xAxis);
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis);
+});
+
+</script>
+=======
 <img src="" alt="" />
+>>>>>>> 4b89a7d7184b4ca5ac1e005ad58d5fb0304695aa

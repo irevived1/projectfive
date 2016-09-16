@@ -34,4 +34,3 @@ module CsvHelper
 
 end
 
-# CsvHelper.new.all_zips
