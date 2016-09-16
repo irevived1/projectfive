@@ -1,8 +1,13 @@
 require 'matrix'
+
 # A class for single variable prediction
 
+
+extend ActiveSupport::Concern
+
 class UniPre 
-	attr_accessor :x, :y, :theta
+
+	attr_accessor :x, :y, :theta#, :x_max, :x_min, :y_max, :y_min
 
 	def initialize(x, y)  # x and y are arrays
 		self.x = self.xArrayToMatrix(x)
