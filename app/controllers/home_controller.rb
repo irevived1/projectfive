@@ -21,7 +21,6 @@ class HomeController < ApplicationController
     # term1 = (Object.const_get params[:term1]).all
     # term2 = (Object.const_get params[:term2]).all
 
->>>>>>> f95474267e98613b53ce148706ec176b447f6682
   end
 
   def chloropleth
