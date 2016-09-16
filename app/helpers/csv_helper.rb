@@ -1,7 +1,7 @@
 require 'byebug'
 require 'csv'
 
- module CsvHelper
+module CsvHelper
 
   def all_zips
     csvs = Dir.entries('app/assets/csv').select{|x| x.length > 3}

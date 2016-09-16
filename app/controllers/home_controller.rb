@@ -8,4 +8,9 @@ class HomeController < ApplicationController
     term2 = (Object.const_get params[:term2]).all
     puts term1.inspect
   end
+
+  def chloropleth
+    render 'chloropleth'
+  end
+
 end
