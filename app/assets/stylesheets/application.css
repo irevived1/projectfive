@@ -12,5 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require_bootstrap.min.css
+ *= require_bootstrap.min.css
  *= vis.min.css
  */
