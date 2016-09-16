@@ -19,12 +19,16 @@
     <option value="Streetlight Complaints">Streetlight Complaints</option>
     <option value="Amount Of Trees">Amount Of Trees</option>
   </select>
-  <button type="submit" form="form1" value="Submit">Submit</button>
+  <select name="typeofsort">
+    <option value="zipcode">Sort by Zipcode</option>
+    <option value="value">Sort by Value</option>
+  </select>
+  <button type="submit" form="form1" value="Submit">Click Me!</button>
 </form>
 
 
-<div id="insertyourtitlehere"></div>
-<div id="zipcode"></div>
+<%= button_to "Refresh",  { controller: "about",action: "index"}, method: :get, data: { confirm: "Are you sure?" } %>
+
 <meta charset="utf-8">
 
 <style>
@@ -59,7 +63,7 @@ body {
 }
 
 </style>
-<body>
+
 <script src="//d3js.org/d3.v3.min.js"></script>
 <%# <script> %>
 
@@ -67,3 +71,7 @@ body {
 
 
 <%# </script> %>
+
+<div id="graphy">
+  
+</div>
