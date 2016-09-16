@@ -50,7 +50,7 @@ function buildChart (dataset1, dataset2) {
   dataset1.forEach(function(entry, index) {
     // debugger;
     var tempArray = [];
-    if (dataset2[index] !== undefined) {
+    if (dataset2[index] !== undefined && entry !== undefined) {
       tempArray.push(entry.avg_score);
       tempArray.push(dataset2[index].count)
       tempArray.push(entry.zip);
@@ -110,13 +110,13 @@ function buildChart (dataset1, dataset2) {
 
   //Set X range and domain
     var x = d3.scaleLinear()
-  .range([0, width])
-    .domain([0, maxX]);
+      .range([0, width])
+      .domain([0, maxX]);
 
     //Set Y range and domain
     var y = d3.scaleLinear()
-  .range([height, 0])
-    .domain([0, maxY]);
+      .range([height, 0])
+      .domain([0, maxY]);
 
     //Prime axis
     var xAxis = d3.axisBottom(x).ticks(10).tickSize(-height);
@@ -201,21 +201,23 @@ function buildChart (dataset1, dataset2) {
   // .attr("stroke-width", 1)
   // .attr("stroke", "silver");
 
+  var col1 = Object.keys(dataset1[0])[1]; 
+  var col2 = Object.keys(dataset2[0])[1];
   //Draw the labels
   svg.append("text")
   .attr("text-anchor", "middle")
   .attr("transform", "translate(-30,300) rotate(-90)")
-  .text("Dataset 1");
+  .text(col1);
 
   svg.append("text")
   .attr("text-anchor", "middle")
   .attr("transform", "translate(300,580)")
-  .text("Dataset 2");
+  .text(col2);
 
   //Tipsy
-  var col1; 
-  var col2;
-  // debugger;  
+  var col1 = Object.keys(dataset1[0])[1]; 
+  var col2 = Object.keys(dataset2[0])[1];
+  debugger;  
  
 
 
@@ -226,7 +228,7 @@ function buildChart (dataset1, dataset2) {
     html: true,
     title: function() {
       d = this.__data__;
-      return col1 + ": " + d[0] + "<br/>Eagles: " + d[1];
+      return col1 + ": " + d[0] + "<br/>" + col2 + ": " + d[1];
     }
   });
   // var w = 500;
