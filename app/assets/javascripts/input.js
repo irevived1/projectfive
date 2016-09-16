@@ -14,6 +14,93 @@ function count_digit(input) {
   return String(input).length;
 }
 
+function graphChanger(input) {
+  hash = {
+    "Graffiti Complaints":1,
+    "Heating Complaints":2,
+    "Illegal Parking Complaints":3,
+    "Noise Complaints":4,
+    "Restaurant Average Score":5,
+    "Streetlight Complaints":6,
+    "Amount Of Trees":7
+  };
+  return hash[input];
+}
+
+$(function () {
+  
+$('form button').click(function(e) {
+d3.select("svg").remove();
+d3.csv("/assets/master.csv", function(error, data) {
+  if (error) throw error;
+
+  var tmp = Object.keys(data[0])
+  var zipcode = tmp[0]
+  var gname = graphChanger($('form option:selected').html());
+  var value=tmp[gname == undefined ? 1 : gname];
+  var name_of_column = value.replace(/_/g," ");
+  $('#insertyourtitlehere').html(name_of_column.toUpperCase());
+  $('#zipcode').html(tmp[0].toUpperCase()).css('transform', 'rotate(90deg)');
+
+  var m = [60, 10, 10, 60],
+      w = 800 - m[1] - m[3],
+      h = (15*data.length) - m[0] - m[2];
+
+  var format = d3.format(",.0f");
+
+  var x = d3.scale.linear().range([0, w]),
+      y = d3.scale.ordinal().rangeRoundBands([0, h], .1);
+
+  var xAxis = d3.svg.axis().scale(x).orient("top").tickSize(-h),
+      yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0);
+
+  var svg = d3.select("body").append("svg")
+      .attr("width", w + m[1] + m[3])
+      .attr("height", h + m[0] + m[2])
+    .append("g")
+      .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+
+  // Parse numbers, and sort by SCORE.
+  data.forEach(function(d) { d[value] = +d[value]; });
+  //data.sort(function(a, b) { return b.SCORE - a.SCORE; });
+  data.sort(function(a, b) { return b[zipcode] - a[zipcode]; });
+
+  // Set the scale domain.
+  x.domain([0, d3.max(data, function(d) { return d[value]; })]);
+  y.domain(data.map(function(d) { return d[zipcode]; }));
+  var max = d3.max(data, function(d) { return d[value]; });
+
+  var bar = svg.selectAll("g.bar")
+      .data(data)
+    .enter().append("g")
+      .attr("class", "bar")
+      .attr("transform", function(d) { return "translate(0," + y(d[zipcode]) + ")"; });
+
+  bar.append("rect")
+      .attr("width", function(d) { return x(d[value]); })
+      .attr("height", y.rangeBand());
+
+  bar.append("text")
+      .attr("class", "value")
+      .attr("x", function(d) { return (x(d[value]) +  (shiftvalue((d[value]),max))   ); })
+      .attr("y", y.rangeBand() / 2)
+  //shiftvalue(x(d[value]))
+      .attr("dx", -3 )
+      .attr("dy", ".35em")
+      .attr("text-anchor", "end")
+      .text(function(d) { return format(d[value]); });
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .call(xAxis);
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis);
+});
+e.preventDefault();
+});
+});
 // $(document).ready(function() {
 //   window.restaurant_average_score = {};
 //   $.ajax({

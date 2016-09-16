@@ -13,5 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require linechart/linechartImp.js
+//= require linechart/linechartShow.js
 //= require_tree .
 

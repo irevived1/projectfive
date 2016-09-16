@@ -6,7 +6,7 @@ class HomeController < ApplicationController
   end
 
   def display
-    # byebug
+     # byebug
     x = []
     y = []
   	CSV.foreach("app/assets/csv/master.csv", headers: true) do |row|
@@ -18,10 +18,6 @@ class HomeController < ApplicationController
 		up.n
 		
     @theta = up.theta
-
-    # term1 = (Object.const_get params[:term1]).all
-    # term2 = (Object.const_get params[:term2]).all
-    
   end
 
   def chloropleth
