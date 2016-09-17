@@ -25,6 +25,7 @@ class UniPre
 	def n   # => Matrix [[], []]
 		x_t = self.x.transpose
 		first = x_t * self.x
+		byebug
 		x_i = first.inverse
 
 		theta =  x_i * x_t * self.y
