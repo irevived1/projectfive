@@ -88,6 +88,7 @@ $(function () {
         .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
 
     // Parse numbers, and sort by SCORE.
+    // converts to integer
     data.forEach(function(d) { d[value] = +d[value]; });
     if ( typeofsort == "value" ) {
       data.sort(function(a, b) { return b[value] - a[value]; });
@@ -96,9 +97,9 @@ $(function () {
     }
 
     // Set the scale domain.
-    x.domain([0, d3.max(data, function(d) { return d[value]; })]);
-    y.domain(data.map(function(d) { return d[zipcode]; }));
     var max = d3.max(data, function(d) { return d[value]; });
+    x.domain([0, max]);
+    y.domain(data.map(function(d) { return d[zipcode]; }));
 
     var bar = svg.selectAll("g.bar")
         .data(data)
@@ -136,6 +137,7 @@ $(function () {
     e.preventDefault();
  });
 });
+
 // $(document).ready(function() {
 //   window.restaurant_average_score = {};
 //   $.ajax({
