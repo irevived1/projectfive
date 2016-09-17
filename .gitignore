@@ -23,3 +23,5 @@
 
 # ignore swp files
 *.swp
+
+/app/.DS_Store
