@@ -28,22 +28,6 @@
   var first = $("#term1").data("first");
   var second = $("#term2").data("second");
   console.log(theta);
-  var data = function (n1, n2) {  
-    $.ajax({
-      type: "GET",
-      url: "/assets/master.csv",
-      dataType: "text",
-      success: function(data) {  
-        parsedData = d3.csvParse(data);   
-        firstData = Object.keys(parsedData[0])[n1];
-        secondData = Object.keys(parsedData[0])[n2];
-        // debugger;
-        buildLineChart(parsedData, firstData, secondData);
-        // buildLineChart(parsedData, firstData, secondData);
-        return data;
-      }
-    })
-  }
 
   var fetchData = function(n1, n2) {
     $.ajax({
@@ -54,22 +38,22 @@
         parsedData = d3.csv.parse(data);   
         firstData = Object.keys(parsedData[0])[2];
         secondData = Object.keys(parsedData[0])[3];
-        debugger;
+
         var p_data = parseData(parsedData, firstData, secondData);
         buildLineChart(p_data, firstData, secondData);
       }
     });
   }
 
-  fetchData("graffiti_complaints", "heating_complaints");
+  fetchData("Meat Price Index", "Dairy Price Index");
 
   function buildLineChart(parsedData, firstData, secondData) {
     nv.addGraph(function() {
       var chart = nv.models.lineChart()
         .useInteractiveGuideline(true)
         ;
-      // chart.forceX([50, 300]);
-      // chart.forceY([50, 300]);
+      // chart.forceX([100, 200]);
+      // chart.forceY([100, 200]);
       chart.xAxis
         .axisLabel(firstData)
         .tickFormat(d3.format('.02f'))
@@ -94,23 +78,20 @@
 
  function parseData(data, term1, term2) {
     var r = [];
-    var unsorted = [];
-    for (var i = 0; i < data.length; i++) {
-      var xData = parseInt(data[i][term1]);
-      unsorted.push(xData);
-      // r.push({x: xData, y: prediction});
-      // cos.push({x: i, y: .5 * Math.cos(i/10)});
+
+    var max = Math.max.apply(Math, data.map(function(o){
+      return o[term1];
+    }));
+
+    var min = Math.min.apply(Math, data.map(function(o){
+      return o[term2];
+    }));
+
+    for (var i = min; i <= max; i++) {
+      var prediction = theta * i;
+      r.push({x: i, y: prediction});
     }
 
-    var sorted = unsorted.sort();
-    unsorted = null;
-    var max = Math.max(...sorted);
-    for (var i = 0; i < sorted.length; i++) {
-      var prediction = theta * sorted[i];
-      r.push({x: sorted[i], y: prediction});
-    }
-    sorted = null;
-    debugger;
     return [
       {
         values: r,
@@ -119,51 +100,6 @@
       }
     ];
   }
-
-
-// 	nv.addGraph(function() {
-//     var chart = nv.models.lineChart()
-//       .useInteractiveGuideline(true)
-//       ;
-
-//     chart.xAxis
-//       .axisLabel('Time (ms)')
-//       .tickFormat(d3.format(',r'))
-//       ;
-
-//     chart.yAxis
-//       .axisLabel('Voltage (v)')
-//       .tickFormat(d3.format('.02f'))
-//       ;
-
-//     d3.select('#chart svg')
-//       .datum(data())
-//       .transition().duration(500)
-//       .call(chart)
-//       ;
-
-//     nv.utils.windowResize(chart.update);
-
-//     return chart;
-//   });
-
-// var data = function() {
-//   var sin = [],
-//       cos = [];
-
-//   for (var i = 0; i < 100; i++) {
-//     sin.push({x: i, y: Math.sin(i/10)});
-//     // cos.push({x: i, y: .5 * Math.cos(i/10)});
-//   }
-
-//   return [
-//     {
-//       values: sin,
-//       key: 'Sine Wave',
-//       color: '#E91E63'
-//     }
-//   ];
-// }
 
 </script>
     
