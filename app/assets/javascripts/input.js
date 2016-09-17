@@ -61,7 +61,8 @@ $(function () {
 
   // d3.select("svg").remove();
   $('body div#graphy').prepend("<p></p>");
-  var firstptag = $('body div#graphy p:first-child')
+  var firstptag = $('body div#graphy p:first-child');
+  firstptag.hide();
   d3.csv("/assets/master.csv", function(error, data) {
     if (error) throw error;
 
@@ -135,6 +136,7 @@ $(function () {
         .attr("class", "y axis")
         .call(yAxis);
   });
+  firstptag.fadeIn(2000);
   e.preventDefault();
   });
 

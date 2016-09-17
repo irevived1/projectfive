@@ -24,6 +24,4 @@ class HomeController < ApplicationController
     render 'chloropleth'
   end
 
-  end
-
 end
