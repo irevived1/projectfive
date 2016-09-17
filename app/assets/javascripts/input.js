@@ -52,6 +52,7 @@ $(function () {
       //   scrollTop: $( "#"+ (graphytitle+typeofsort )).offset().top
       // }, 1000);
       breakexecution = true;
+      return;
     }
   });
   if (breakexecution) {
@@ -60,9 +61,10 @@ $(function () {
   }
 
   // d3.select("svg").remove();
-  $('body div#graphy').prepend("<p></p>");
+  $('body div#graphy').prepend('<p></p>');
   var firstptag = $('body div#graphy p:first-child');
-  firstptag.hide();
+  // firstptag.hide();
+  firstptag.animate({ "height": "toggle", "opacity": "toggle" });
   d3.csv("/assets/master.csv", function(error, data) {
     if (error) throw error;
 
@@ -135,8 +137,12 @@ $(function () {
     svg.append("g")
         .attr("class", "y axis")
         .call(yAxis);
+
   });
-  firstptag.fadeIn(2000);
+  // firstptag.fadeIn(2000);
+  // firstptag.show("slow");
+
+  firstptag.animate({ "height": "toggle", "opacity": "toggle" }, 2000);
   e.preventDefault();
   });
 
