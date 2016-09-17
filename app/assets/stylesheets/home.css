@@ -18,3 +18,11 @@ body text {
 #chart svg {
   height: 400px;
 }
+
+.bg-lblue {
+  background-color: #FFF3E0 !important;
+}
+
+.linechart {
+	background-color: #FFF3E0 !important;
+}
