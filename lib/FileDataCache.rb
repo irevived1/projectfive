@@ -3,8 +3,9 @@ require 'singleton'
 class FileDataCache
   include Singleton
 
-  def initialize(file_data=nil)
-    @file_data = file_data
+  def initialize
+    @file_data = nil
+    @filename = nil
   end
 
   def file_data=(file_data)
@@ -13,5 +14,18 @@ class FileDataCache
 
   def file_data
   	@file_data
+  end
+
+  def filename=(filename)
+    @filename = filename
+  end
+
+  def filename
+    @filename
+  end
+
+  def destroy
+    @file_data = nil
+    @filename = nil
   end
 end

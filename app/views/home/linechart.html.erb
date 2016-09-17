@@ -14,7 +14,7 @@
   <body class="">
   <br>
 
-  <section class="section" id="aboutview">
+  <section class="section <%= "hide" if FileDataCache.instance.file_data %>" id="aboutview">
     <div class="container-fluid bg" >
       <div class="row">
       <div class="container marginTop20">
@@ -29,9 +29,11 @@
   
     <div class="row">
     <div class="container marginTop20">
+      
       <div id="theta" data-theta="<%= @theta %>"></div>
       <div id="term1" data-first="<%= @term1 %>"></div>
       <div id="term2" data-second="<%= @term2 %>"></div>
+      <div id="file" data-file="<%= @filename %>"></div>
 
       <div class="row">
         <%= form_tag({:action => :uploadCSVFile}, multipart: true) do %>
@@ -42,15 +44,17 @@
         <% end %>
 <!--         <input id="fileSelect" type="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" /> -->
         <br>
-        <%= form_tag("/linechart", id: "linechart", method: "post") do %>
-          <%= text_field_tag(:term1) %>
-          <%= text_field_tag(:term2) %>
-          <%= submit_tag("Predict", class: "btn btn-sm btn-brown") %>
-        <% end %>
+        <div class="<%= "hide" if !FileDataCache.instance.file_data %>">
+          <%= form_tag("/linechart", id: "linechart", method: "post") do %>
+            <%= text_field_tag(:term1) %>
+            <%= text_field_tag(:term2) %>
+            <%= submit_tag("Predict", class: "btn btn-sm btn-brown") %>
+          <% end %>
+        </div>
       </div>
     
       <br>
-  sdfsdfsdsdfsdfsdfsdfsdfsdfsdfsdfsfsdfsdf
+
       <div id="chart" class="row linechart">
       <% if @theta %>
         <h3>Theta: <%= @theta %></h3>
@@ -74,34 +78,48 @@
 
   if (theta) {
     drawLineChart(theta);
+  } else {
+    // drawLineChart(0);
   }
 
 
 function drawLineChart(theta){
   
-  var first = $("input#term1").text();
-  var second = $("input#term2").text();
-  // var first = $("#term1").data("first");
-  // var second = $("#term2").data("second");
-  console.log(theta);
+  if (theta !== 0) {
+    var first = $("input#term1").text();
+    var second = $("input#term2").text();
+    var filename = $("#file").data("file");
+    // var second = $("#term2").data("second");
+    console.log(filename);
 
-  var fetchData = function(n1, n2) {
-    $.ajax({
-      type: "GET",
-      url: "/assets/food_price.csv",
-      dataType: "text",
-      success: function(data) {  
-        parsedData = d3.csv.parse(data);   
-        firstData = Object.keys(parsedData[0])[2];
-        secondData = Object.keys(parsedData[0])[3];
+    var fetchData = function(n1, n2) {
+      $.ajax({
+        type: "GET",
+        url: "/assets/" + filename,//food_price.csv",
+        dataType: "text",
+        success: function(data) {  
+          parsedData = d3.csv.parse(data);   
+          firstData = Object.keys(parsedData[0])[2];
+          secondData = Object.keys(parsedData[0])[3];
 
-        var p_data = parseData(parsedData, firstData, secondData);
-        buildLineChart(p_data, firstData, secondData);
+          var p_data = parseData(parsedData, firstData, secondData);
+          buildLineChart(p_data, firstData, secondData);
+        }
+      });
+    }
+
+    fetchData(first, second);
+  } else {
+    debugger;
+    var initData = [
+      {
+        values: [{x:0, y:0}],
+        key: 'Prediction',
+        color: '#E91E63'
       }
-    });
+    ];
+    buildLineChart(initData, 'none', 'none');
   }
-
-  fetchData(first, second);
 
   function buildLineChart(parsedData, firstData, secondData) {
     nv.addGraph(function() {
@@ -148,6 +166,7 @@ function drawLineChart(theta){
       r.push({x: i, y: prediction});
     }
 
+    debugger;
     return [
       {
         values: r,

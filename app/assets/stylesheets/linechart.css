@@ -38,3 +38,7 @@
   background-color: #d08166 !important;
   background-size: cover;
 }
+
+.hide {
+	display: none;
+}
