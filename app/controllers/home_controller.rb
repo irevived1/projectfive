@@ -1,12 +1,12 @@
 require 'csv'
 class HomeController < ApplicationController
 
+  @@FileDataCache = FileDataCache.instance
 
   def index
   end
 
   def display
-    @theta = calculateTheta
   end
 
   def chloropleth
@@ -14,29 +14,33 @@ class HomeController < ApplicationController
   end
 
   def linechart
-
-    # @theta = calculateTheta
   end
 
   def drawLineChart
     # byebug
     @term1 = params[:term1]
     @term2 = params[:term2]
-    @theta = calculateTheta
+    @theta = calculateTheta(@@FileDataCache.file_data)
     render :linechart
+  end
+
+  def uploadCSVFile
+    if params[:file]
+      csv_text = File.read(params[:file].path)
+      @file_data = CSV.parse(csv_text, :headers => true)
+      @@FileDataCache.file_data = @file_data
+      render :linechart
+    end
   end
 
   private
 
-
-  def calculateTheta
+  def calculateTheta(fileData)
     x = []
     y = []
-    CSV.foreach("app/assets/csv/food_price.csv", headers: true) do |row|
+    fileData.each do |row|
       x << row[params[:term1]].to_i
       y << row[params[:term2]].to_i
-      # x << row["Meat Price Index"].to_i
-      # y << row["Dairy Price Index"].to_i
     end
 
     up = UniPre.new(x, y)

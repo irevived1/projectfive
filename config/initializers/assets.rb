@@ -10,3 +10,4 @@ Rails.application.config.assets.precompile += %w(input.js)
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
 require "#{Rails.root}/lib/UniPre.rb"
+require "#{Rails.root}/lib/FileDataCache.rb"

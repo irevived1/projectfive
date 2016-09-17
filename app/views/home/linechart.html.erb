@@ -12,21 +12,21 @@
   </head>
 
   <body>
+  <br>
   <div class="container">
     <div class="row">
-      <!-- <div class="col-md-1"> -->
-        <div id="theta" data-theta="<%= @theta %>"></div>
-        <!-- <input id="theta" type="hidden" value="<%= @theta %>"> -->
-        <div id="term1" data-first="<%= @term1 %>"></div>
-        <div id="term2" data-second="<%= @term2 %>"></div>
-      <!-- </div> -->
+      <div id="theta" data-theta="<%= @theta %>"></div>
+      <div id="term1" data-first="<%= @term1 %>"></div>
+      <div id="term2" data-second="<%= @term2 %>"></div>
 
       <div class="row">
-        <%#= form_tag({:action => :linechart}, multipart: true) do %>
-          <%#= file_field_tag :file %>
-          <%#= submit_tag( "Import" ) %>
-        <%# end %>
-        <input id="fileSelect" type="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+        <%= form_tag({:action => :uploadCSVFile}, multipart: true) do %>
+          <div class="row">
+            <%= file_field_tag :file, class: "col-md-2" %>
+            <%= submit_tag( "Import", class: "col-md-1") %>
+          </div>
+        <% end %>
+<!--         <input id="fileSelect" type="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" /> -->
         <br>
         <%= form_tag("/linechart", id: "linechart", method: "post") do %>
           <%= text_field_tag(:term1) %>
