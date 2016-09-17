@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root to: "about#index"
   post 'display' => 'home#display'
 	get 'linechart' => 'home#linechart'
+	post 'linechart' => 'home#drawLineChart'
   get 'chloropleth', to: "home#chloropleth"
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

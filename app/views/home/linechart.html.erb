@@ -8,25 +8,60 @@
     
     
     <link rel='stylesheet prefetch' href='http://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.1/nv.d3.css'>
-    
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
   </head>
 
   <body>
-  <div id="theta" data-theta="<%= @theta %>"></div>
-  <div id="term1" data-first="<%= @term1 %>"></div>
-  <div id="term2" data-second="<%= @term2 %>"></div>
+  <div class="container">
+    <div class="row">
+      <!-- <div class="col-md-1"> -->
+        <div id="theta" data-theta="<%= @theta %>"></div>
+        <!-- <input id="theta" type="hidden" value="<%= @theta %>"> -->
+        <div id="term1" data-first="<%= @term1 %>"></div>
+        <div id="term2" data-second="<%= @term2 %>"></div>
+      <!-- </div> -->
 
-  <div id="chart">
-    <svg></svg>
+      <div class="row">
+        <%#= form_tag({:action => :linechart}, multipart: true) do %>
+          <%#= file_field_tag :file %>
+          <%#= submit_tag( "Import" ) %>
+        <%# end %>
+        <input id="fileSelect" type="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+        <br>
+        <%= form_tag("/linechart", id: "linechart", method: "post") do %>
+          <%= text_field_tag(:term1) %>
+          <%= text_field_tag(:term2) %>
+          <%= submit_tag("Predict") %>
+        <% end %>
+      </div>
+      <br>
+
+      <div id="chart" class="row">
+      
+        <svg></svg>
+      </div>
+
+    </div>
   </div>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.js'></script>
-<script src='http://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.1/nv.d3.js'></script>
-
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.1/nv.d3.js'></script>
+    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <!-- <script src="js/index.js"></script> -->
 <script type="text/javascript">
   var theta = $("#theta").data("theta");
-  var first = $("#term1").data("first");
-  var second = $("#term2").data("second");
+
+  if (theta) {
+    drawLineChart(theta);
+  }
+
+
+function drawLineChart(theta){
+  
+  var first = $("input#term1").text();
+  var second = $("input#term2").text();
+  // var first = $("#term1").data("first");
+  // var second = $("#term2").data("second");
   console.log(theta);
 
   var fetchData = function(n1, n2) {
@@ -45,7 +80,7 @@
     });
   }
 
-  fetchData("Meat Price Index", "Dairy Price Index");
+  fetchData(first, second);
 
   function buildLineChart(parsedData, firstData, secondData) {
     nv.addGraph(function() {
@@ -100,7 +135,7 @@
       }
     ];
   }
-
+}
 </script>
     
     

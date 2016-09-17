@@ -14,18 +14,29 @@ class HomeController < ApplicationController
   end
 
   def linechart
+
+    # @theta = calculateTheta
+  end
+
+  def drawLineChart
+    # byebug
+    @term1 = params[:term1]
+    @term2 = params[:term2]
     @theta = calculateTheta
+    render :linechart
   end
 
   private
+
+
   def calculateTheta
     x = []
     y = []
     CSV.foreach("app/assets/csv/food_price.csv", headers: true) do |row|
-      x << row["Meat Price Index"].to_i
-      y << row["Dairy Price Index"].to_i
-      # x << row["graffiti_complaints"].to_i
-      # y << row["heating_complaints"].to_i
+      x << row[params[:term1]].to_i
+      y << row[params[:term2]].to_i
+      # x << row["Meat Price Index"].to_i
+      # y << row["Dairy Price Index"].to_i
     end
 
     up = UniPre.new(x, y)
