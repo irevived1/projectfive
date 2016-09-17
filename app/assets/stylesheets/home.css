@@ -15,31 +15,3 @@ body text {
   text-align: center;
 }
 
-#chart svg {
-  height: 400px;
-}
-
-.bg-lblue {
-  background-color: #FFF3E0 !important;
-}
-
-.linechart {
-	background-color: #FFF3E0 !important;
-}
-
-.marginTop5 {
-	margin-top: 5px;
-}
-
-.btn.btn-brown {
-	background: #d08166;
-	color: #ffffff;
-	border: 1px solid #c4613f;
-}
-.btn.btn-brown:hover,
-.btn.btn-brown:focus,
-.btn.btn-brown.active,
-.btn.btn-brown:active {
-	background: #c4613f;
-	color: #ffffff;
-}

@@ -1,0 +1,40 @@
+#chart svg {
+  height: 400px;
+}
+
+
+.bg-yellow {
+	background-color: #FFF3E0 !important;
+}
+
+.marginTop5 {
+	margin-top: 5px;
+}
+.marginTop20 {
+	margin-top: 20px;
+}
+
+.btn.btn-brown {
+	background: #d08166;
+	color: #ffffff;
+	border: 1px solid #c4613f;
+}
+.btn.btn-brown:hover,
+.btn.btn-brown:focus,
+.btn.btn-brown.active,
+.btn.btn-brown:active {
+	background: #c4613f;
+	color: #ffffff;
+}
+
+/* Introduction background */
+#aboutview .bg {
+  background-color: #FFF3E0 !important;
+  background-size: cover;
+}
+
+/* Services background */
+#chartview .bg {
+  background-color: #d08166 !important;
+  background-size: cover;
+}

@@ -11,10 +11,24 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
   </head>
 
-  <body class="bg-lblue">
+  <body class="">
   <br>
-  <div class="container">
+
+  <section class="section" id="aboutview">
+    <div class="container-fluid bg" >
+      <div class="row">
+      <div class="container marginTop20">
+        Aboutsdfsdfsdfsdfsdfsdfsdfsfsd
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="section" id="chartview">
+  <div class="container-fluid half bg" >
+  
     <div class="row">
+    <div class="container marginTop20">
       <div id="theta" data-theta="<%= @theta %>"></div>
       <div id="term1" data-first="<%= @term1 %>"></div>
       <div id="term2" data-second="<%= @term2 %>"></div>
@@ -34,17 +48,22 @@
           <%= submit_tag("Predict", class: "btn btn-sm btn-brown") %>
         <% end %>
       </div>
+    
       <br>
-
+  sdfsdfsdsdfsdfsdfsdfsdfsdfsdfsdfsfsdfsdf
       <div id="chart" class="row linechart">
       <% if @theta %>
         <h3>Theta: <%= @theta %></h3>
       <% end %>
         <svg></svg>
       </div>
-
+    </div>
     </div>
   </div>
+</section>
+
+
+
     <script src='http://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.js'></script>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.1/nv.d3.js'></script>
     
