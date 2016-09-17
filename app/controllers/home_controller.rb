@@ -21,11 +21,11 @@ class HomeController < ApplicationController
   end
 
   def drawLineChart
-    # byebug
     @term1 = params[:term1]
     @term2 = params[:term2]
     @filename = @@FileDataCache.filename
     @theta = calculateTheta(@@FileDataCache.file_data)
+    @headers = @@FileDataCache.headers
     render :linechart
   end
 
@@ -33,14 +33,16 @@ class HomeController < ApplicationController
     if @file
       csv_text = File.read(@file.path)
       @file_data = CSV.parse(csv_text, :headers => true)
+
+      @headers = @file_data.headers.map.with_index do |h, i|
+        [h] if h.nil? == false && h.blank? == false && h.empty? == false && h != 'nil'
+      end
+
       @@FileDataCache.file_data = @file_data
       @@FileDataCache.filename = @file.original_filename
+      @@FileDataCache.headers = @headers
 
       File.open("app/assets/csv/" + @file.original_filename, 'w+') do |f|
-        # heat_hash.each do |zip, count|
-        #   csv << [zip, count]
-        # end
-        # csv << csv_text
         f.write(csv_text)
       end
       render :linechart

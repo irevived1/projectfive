@@ -46,8 +46,10 @@
         <br>
         <div class="<%= "hide" if !FileDataCache.instance.file_data %>">
           <%= form_tag("/linechart", id: "linechart", method: "post") do %>
-            <%= text_field_tag(:term1) %>
-            <%= text_field_tag(:term2) %>
+            <%= select_tag(:term1, options_for_select(@headers || [])) %>
+            <%= select_tag(:term2, options_for_select(@headers || [])) %>
+            <%#= text_field_tag(:term1) %>
+            <%#= text_field_tag(:term2) %>
             <%= submit_tag("Predict", class: "btn btn-sm btn-brown") %>
           <% end %>
         </div>
@@ -57,7 +59,7 @@
 
       <div id="chart" class="row linechart">
       <% if @theta %>
-        <h3>Theta: <%= @theta %></h3>
+        <h3 align="center">Theta: <%= @theta %></h3>
       <% end %>
         <svg></svg>
       </div>
@@ -86,10 +88,14 @@
 function drawLineChart(theta){
   
   if (theta !== 0) {
-    var first = $("input#term1").text();
-    var second = $("input#term2").text();
+    // var first = $("input#term1").text();
+    // var second = $("input#term2").text();
+    // var first = $('select')[0].value;
+    // var second  = $('select')[1].value;
+    
     var filename = $("#file").data("file");
-    // var second = $("#term2").data("second");
+    var first = $("#term1").data("first");
+    var second = $("#term2").data("second");
 
     var fetchData = function(n1, n2) {
       $.ajax({
@@ -109,7 +115,6 @@ function drawLineChart(theta){
 
     fetchData(first, second);
   } else {
-    debugger;
     var initData = [
       {
         values: [{x:0, y:0}],
@@ -165,7 +170,6 @@ function drawLineChart(theta){
       r.push({x: i, y: prediction});
     }
 
-    debugger;
     return [
       {
         values: r,
