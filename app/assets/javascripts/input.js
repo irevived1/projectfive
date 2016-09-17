@@ -28,26 +28,32 @@ function graphChanger(input) {
 }
 
 function jump(h){
-    var url = location.href;               //Save down the URL without hash.
-    location.href = "#"+h;                 //Go to the target element.
-    history.replaceState(null,null,url);   //Don't like hashes. Changing it back.
+    // var url = location.href;               //Save down the URL without hash.
+    // location.href = "#"+h;                 //Go to the target element.
+    // history.replaceState(null,null,url);   //Don't like hashes. Changing it back.
+    $('html, body').animate({
+      scrollTop: $('#'+h).offset().top
+    }, 1000);
 }
 
 $(function () {
 
 
   $('form button').click(function(e) {
-  var graphytitle = $('select[name="fname"]').val();
+  var gtitle = $('select[name="fname"]').val();
+  var graphytitle = gtitle.replace(/\s/g,"").toLowerCase();
   var typeofsort = $('select[name="typeofsort"]').val()
 
   var breakexecution = false;
   $('.graphytitle').each(function() {
-    if ( $(this).attr('id') == ( graphytitle.toLowerCase()+typeofsort ) ) {
-      jump(( graphytitle.toLowerCase()+typeofsort ));
+    if ( $(this).attr('id') == ( graphytitle+typeofsort ) ) {
+      jump(( graphytitle+typeofsort ));
+      // $('html, body').animate({
+      //   scrollTop: $( "#"+ (graphytitle+typeofsort )).offset().top
+      // }, 1000);
       breakexecution = true;
     }
   });
-
   if (breakexecution) {
     e.preventDefault();
     return;
@@ -61,10 +67,10 @@ $(function () {
 
     var tmp = Object.keys(data[0])
     var zipcode = tmp[0]
-    var gname = graphChanger(graphytitle);
+    var gname = graphChanger(gtitle);
     var value=tmp[gname == undefined ? 1 : gname];
     var name_of_column = value.replace(/_/g," ");
-    firstptag.append('<h2 class="graphytitle" id="' + name_of_column + typeofsort + '">' + name_of_column.toUpperCase() + ' SORT BY ' + typeofsort.toUpperCase() + '</h3>');
+    firstptag.append('<h2 class="graphytitle" id="' + graphytitle + typeofsort + '">' + name_of_column.toUpperCase() + ' SORT BY ' + typeofsort.toUpperCase() + '</h3>');
     firstptag.append('<a class="myanchors" onclick="return false" href="#toptop"> <img src="/assets/toptop" alt="Back to Top"/> </a>');
     firstptag.append('<h3>' + tmp[0].toUpperCase() + '</h3>');
 
@@ -133,7 +139,7 @@ $(function () {
   });
 
  $(document).delegate('a.myanchors','click', function (e) {
-    jump("toptop");
+     jump('toptop');
     e.preventDefault();
  });
 });
