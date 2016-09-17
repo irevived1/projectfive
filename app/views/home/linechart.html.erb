@@ -16,29 +16,39 @@
 
   <section class="section <%= "hide" if FileDataCache.instance.file_data %>" id="aboutview">
     <div class="container-fluid bg" >
-      <div class="row">
-        <div class="container marginTop20">
-          <!-- Item -->
-            <div class="ui-item clearfix bg-lblue">
+      <!-- <div class="row"> -->
+      <div class="container marginTop20">
+        <!-- Item -->
+          <div class="ui-item clearfix bg-lblue">
+            <div class="row">
               <!-- Heading -->
-              <h3>Prediction Line Chart</h3>
-              <!-- Content -->
-              <div class="ui-content">
-                <!-- Heading -->
-                <h4>Aliquam Quaerat</h4>
-                <!-- Paragraph -->
-                <p>Sed ut perspi ciatis unde omnis iste natus error sit volup tatem accusa ntium dolor emque lauda ntium, totam rem aper iam, eaque ipsa quae ab illo inven tore verit atis et quasi archi tecto bea tae vitae dicta sunt expli cabo.</p>
-                <!-- Button -->
-              </div>
-            </div>
-        </div>
+              <div class="col-md-4">
+              <h2>Prediction Line Chart</h3><br>
+              <p>This line chart shows the relationship between two related features. It can be used to predict the value of y from the value of x. It reads a dataset, and, by implementing a normal equation, predicts the reasonable value of y based on the dataset. Also, you can upload your own CSV dataset. For calculation, I use the Ruby classes Matrix, Vector, and Rational.</p>
+                <img src="assets/prediction_l.svg" alt="Prediction" width="330px" height="300px">
+              </div><!-- Heading -->
+
+
+              <div class="col-md-8">
+                <br><br><br><br>
+                <ul>
+                  <li>
+                    <h4>Algorithm Selection</h4>
+                    <p>I use a normal equation to calculate the reasonable y from x based on a dataset. I tried to implement a regression eqution with a descent function, but, in Ruby, it is difficult to implement the complex functions. Using a normal equation is not the best approach for prediction, but, in Ruby, it is efficient on big datasets and I do not need to iterate the datasets. I found several Ruby classes(Matrix, Vector, Rational) which helps me to implement the equation. I wrote a class UniPre.rb which takes two arrays(x, y) and gives you a key value(T) for prediction.</p>
+                  </li>
+                  
+                </ul>
+              </div><!-- Content -->
+            </div><!-- row -->
+          </div>
       </div>
+      <!-- </div> -->
     </div>
   </section>
   
   <section class="section" id="chartview" >
   <div class="container-fluid half" >
-    <span style="margin-left: 20px;margin-top: 40px;"><a class="arrow arrow-left" title="Home Page" href="/"></a></span>
+    
     <br>
     <div class="container marginTop20" >
       
@@ -49,6 +59,9 @@
       <div id="file" data-file="<%= @filename %>"></div>
 
       <div class="row">
+        <div class="col-md-1"><span style="margin-left: 20px;"><a class="arrow arrow-left" title="Home Page" href="/"></a></span></div>
+
+        <div class="col-md-11" style="margin-top: 15px;">
         <%= form_tag({:action => :uploadCSVFile}, multipart: true) do %>
           <div class="row">
             <%= file_field_tag :file, class: "col-md-2 marginTop5" %>
@@ -65,6 +78,7 @@
             <%= submit_tag("Predict", class: "btn btn-sm btn-brown") %>
           <% end %>
         </div>
+        </div>
       </div>
     
       <br>
@@ -73,7 +87,7 @@
 
       <div id="chart" class="row linechart">
       <% if @theta %>
-        <h3 align="center">Theta: <%= @theta %></h3>
+        <h3 align="center">T: <%= @theta %></h3>
       <% end %>
         <svg></svg>
       </div>
@@ -110,19 +124,17 @@ function drawLineChart(theta){
     var filename = $("#file").data("file");
     var first = $("#term1").data("first");
     var second = $("#term2").data("second");
-
+    debugger;
     var fetchData = function(n1, n2) {
       $.ajax({
         type: "GET",
         url: "/assets/" + filename,//food_price.csv",
         dataType: "text",
         success: function(data) {  
-          parsedData = d3.csv.parse(data);   
-          firstData = Object.keys(parsedData[0])[2];
-          secondData = Object.keys(parsedData[0])[3];
+          parsedData = d3.csv.parse(data);
 
-          var p_data = parseData(parsedData, firstData, secondData);
-          buildLineChart(p_data, firstData, secondData);
+          var p_data = parseData(parsedData, n1, n2);
+          buildLineChart(p_data, n1, n2);
         }
       });
     }
