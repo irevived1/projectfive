@@ -22,8 +22,8 @@
       <div class="row">
         <%= form_tag({:action => :uploadCSVFile}, multipart: true) do %>
           <div class="row">
-            <%= file_field_tag :file, class: "col-md-2" %>
-            <%= submit_tag( "Import", class: "col-md-1") %>
+            <%= file_field_tag :file, class: "col-md-2 marginTop5" %>
+            <%= submit_tag( "Import", class: "col-md-1 btn btn-sm btn-brown") %>
           </div>
         <% end %>
 <!--         <input id="fileSelect" type="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" /> -->
@@ -31,7 +31,7 @@
         <%= form_tag("/linechart", id: "linechart", method: "post") do %>
           <%= text_field_tag(:term1) %>
           <%= text_field_tag(:term2) %>
-          <%= submit_tag("Predict") %>
+          <%= submit_tag("Predict", class: "btn btn-sm btn-brown") %>
         <% end %>
       </div>
       <br>
