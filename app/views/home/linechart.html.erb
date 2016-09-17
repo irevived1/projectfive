@@ -37,7 +37,9 @@
       <br>
 
       <div id="chart" class="row">
-      
+      <% if @theta %>
+        <h3>Theta: <%= @theta %></h3>
+      <% end %>
         <svg></svg>
       </div>
 
