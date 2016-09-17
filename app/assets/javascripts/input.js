@@ -27,9 +27,32 @@ function graphChanger(input) {
   return hash[input];
 }
 
+function jump(h){
+    var url = location.href;               //Save down the URL without hash.
+    location.href = "#"+h;                 //Go to the target element.
+    history.replaceState(null,null,url);   //Don't like hashes. Changing it back.
+}
+
 $(function () {
-  
+
+
   $('form button').click(function(e) {
+  var graphytitle = $('select[name="fname"]').val();
+  var typeofsort = $('select[name="typeofsort"]').val()
+
+  var breakexecution = false;
+  $('.graphytitle').each(function() {
+    if ( $(this).attr('id') == ( graphytitle.toLowerCase()+typeofsort ) ) {
+      jump(( graphytitle.toLowerCase()+typeofsort ));
+      breakexecution = true;
+    }
+  }); 
+
+  if (breakexecution) {
+    e.preventDefault();
+    return;
+  }
+
   // d3.select("svg").remove();
   $('body div#graphy').prepend("<p></p>");
   var firstptag = $('body div#graphy p:first-child')
@@ -38,11 +61,11 @@ $(function () {
 
     var tmp = Object.keys(data[0])
     var zipcode = tmp[0]
-    var gname = graphChanger($('select[name="fname"]').val());
+    var gname = graphChanger(graphytitle);
     var value=tmp[gname == undefined ? 1 : gname];
     var name_of_column = value.replace(/_/g," ");
-    var typeofsort = $('select[name="typeofsort"]').val()
-    firstptag.append('<h2 class="graphytitle">' + name_of_column.toUpperCase() + ' SORT BY ' + typeofsort.toUpperCase() + '</h3>');
+    firstptag.append('<h2 class="graphytitle" id="' + name_of_column + typeofsort + '">' + name_of_column.toUpperCase() + ' SORT BY ' + typeofsort.toUpperCase() + '</h3>');
+    firstptag.append('<a class="myanchors" onclick="return false" href="#toptop"> <img src="/assets/toptop" alt="Back to Top"/> </a>');
     firstptag.append('<h3>' + tmp[0].toUpperCase() + '</h3>');
 
     var m = [60, 10, 10, 60],
@@ -106,6 +129,11 @@ $(function () {
   });
   e.preventDefault();
   });
+
+ $(document).delegate('a.myanchors','click', function (e) {
+    jump("toptop");
+    e.preventDefault();
+ });
 });
 // $(document).ready(function() {
 //   window.restaurant_average_score = {};
