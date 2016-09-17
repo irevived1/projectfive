@@ -21,11 +21,15 @@
 
 </div>
 
+<div id="linechart">
+  <svg></svg>
+</div>
 
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.15.0/lodash.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tipsy/1.0.3/jquery.tipsy.min.js"></script>
+
 
 <script type="text/javascript">
 var keys = [
@@ -51,9 +55,9 @@ var data = function (n1, n2) {
       parsedData = d3.csvParse(data);   
       firstData = Object.keys(parsedData[0])[n1];
       secondData = Object.keys(parsedData[0])[n2];
-      
+      // debugger;
       buildChart(parsedData, firstData, secondData);
-      buildLineChart(parsedData, firstData, secondData);
+      // buildLineChart(parsedData, firstData, secondData);
       return data;
     }
   })

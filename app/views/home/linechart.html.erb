@@ -8,19 +8,16 @@
     
     
     <link rel='stylesheet prefetch' href='http://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.1/nv.d3.css'>
-
-        <link rel="stylesheet" href="css/style.css">
-
-    
-    
     
   </head>
 
   <body>
 
-    <div id="chart">
+<div id="linechart">
   <svg></svg>
 </div>
+
+
     <script src='http://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.js'></script>
 <script src='http://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.1/nv.d3.js'></script>
 
@@ -65,12 +62,12 @@ var data = function() {
     {
       values: sin,
       key: 'Sine Wave',
-      color: '#ff7f0e'
+      color: '#E91E63'
     },
     {
       values: cos,
       key: 'Cosine Wave',
-      color: '#2ca02c'
+      color: '#2196F3'
     }
   ];
 }
