@@ -35,6 +35,14 @@ class HomeController < ApplicationController
       @file_data = CSV.parse(csv_text, :headers => true)
       @@FileDataCache.file_data = @file_data
       @@FileDataCache.filename = @file.original_filename
+
+      File.open("app/assets/csv/" + @file.original_filename, 'w+') do |f|
+        # heat_hash.each do |zip, count|
+        #   csv << [zip, count]
+        # end
+        # csv << csv_text
+        f.write(csv_text)
+      end
       render :linechart
     end
   end
