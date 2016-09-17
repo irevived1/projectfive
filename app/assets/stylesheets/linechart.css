@@ -1,7 +1,15 @@
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:300,400italic,400,600,700');
+body {
+	color: white;
+	font-size: 13px;
+	line-height: 23px;
+	font-family: 'Open Sans', sans-serif;
+	-webkit-font-smoothing: antialiased;
+}
+
 #chart svg {
   height: 400px;
 }
-
 
 .bg-yellow {
 	background-color: #FFF3E0 !important;
@@ -27,18 +35,51 @@
 	color: #ffffff;
 }
 
-/* Introduction background */
 #aboutview .bg {
-  background-color: #FFF3E0 !important;
+  background-color: #1E88E5 !important;
   background-size: cover;
 }
 
-/* Services background */
-#chartview .bg {
-  background-color: #d08166 !important;
-  background-size: cover;
-}
 
 .hide {
 	display: none;
 }
+
+.bg-blue {
+  background-color: #609cec !important;
+}
+
+
+.arrow {
+  position: absolute;
+  padding: 1.5rem; /* Arrow size */
+          box-shadow: 1px -1px 0 1px crimson inset;
+  -webkit-box-shadow: 2px -2px crimson inset;
+  border: solid transparent;
+  border-width: 0 0 3rem 3rem;
+  transition: 0.2s;
+}
+
+.arrow:hover {
+          box-shadow: 2px -2px 0 2px orchid inset;
+  -webkit-box-shadow: 4px -4px orchid inset;
+}
+
+.arrow-up    { transform:rotate(135deg) }
+.arrow-right { transform:rotate(225deg) }
+.arrow-down  { transform:rotate(-45deg) }
+.arrow-left  { transform:rotate(45deg) }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
