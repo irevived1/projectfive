@@ -6,7 +6,7 @@ function shiftvalue(input,max) {
     return 0;
   }
   else {
-    return (8*count_digit(input));
+    return (8*count_digit(input)+4);
   }
 }
 
@@ -46,7 +46,7 @@ $(function () {
       jump(( graphytitle.toLowerCase()+typeofsort ));
       breakexecution = true;
     }
-  }); 
+  });
 
   if (breakexecution) {
     e.preventDefault();
@@ -68,8 +68,9 @@ $(function () {
     firstptag.append('<a class="myanchors" onclick="return false" href="#toptop"> <img src="/assets/toptop" alt="Back to Top"/> </a>');
     firstptag.append('<h3>' + tmp[0].toUpperCase() + '</h3>');
 
+    var mediawidnowlength = $(window).width();
     var m = [60, 10, 10, 60],
-        w = 800 - m[1] - m[3],
+        w = (mediawidnowlength <= 800 ? 800 : (mediawidnowlength-50))- m[1] - m[3],
         h = (15*data.length) - m[0] - m[2];
 
     var format = d3.format(",.0f");
