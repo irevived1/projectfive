@@ -178,11 +178,12 @@ body.dark #hamburger:not(.open) span {
 /***********************************************
 * Buttons
 ***********************************************/
+/* customized .btn */
 .btn {
   border-radius: 0;
-  padding: 12px 20px;
+  /* padding: 12px 20px; */
   font-size: 11px;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   border: none;
   font-weight: 600;
   letter-spacing: 0.05em;
