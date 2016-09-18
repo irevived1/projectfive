@@ -1,3 +1,4 @@
+var data = undefined;
 function shiftvalue(input,max) {
   // var length = count_digit(input);
   // length = length + Math.floor((length-1)/3);
@@ -6,7 +7,7 @@ function shiftvalue(input,max) {
     return 0;
   }
   else {
-    return (8*count_digit(input));
+    return (8*count_digit(input)+4);
   }
 }
 
@@ -27,26 +28,79 @@ function graphChanger(input) {
   return hash[input];
 }
 
+function setglob(tmp) {
+  data = tmp;
+}
+
+function jump(h){
+    // var url = location.href;               //Save down the URL without hash.
+    // location.href = "#"+h;                 //Go to the target element.
+    // history.replaceState(null,null,url);   //Don't like hashes. Changing it back.
+    $('html, body').animate({
+      scrollTop: $('#'+h).offset().top
+    }, 1000);
+}
+
 $(function () {
-  
-  $('form button').click(function(e) {
-  // d3.select("svg").remove();
-  $('body div#graphy').prepend("<p></p>");
-  var firstptag = $('body div#graphy p:first-child')
   d3.csv("/assets/master.csv", function(error, data) {
     if (error) throw error;
+    setglob(data);
+  });
+
+  var shrink = true;
+  $('form button').click(function(e) {
+
+  if (shrink) {
+    $("header#myheader ul").wrap("<li></li>");
+    $("header#myheader").animate({
+      "textAlign":"left",
+      "font-size":"1em"
+    },1000);
+    $("header#myheader").css({"textAlign":"left"});
+    // $("header#myheader").animate(function() { $("header#myheader").css({"textAlign":"left"})},1000);
+    shrink = false;
+  }
+
+  var gtitle = $('select[name="fname"]').val();
+  var graphytitle = gtitle.replace(/\s/g,"").toLowerCase();
+  var typeofsort = $('select[name="typeofsort"]').val()
+
+  var breakexecution = false;
+  $('.graphytitle').each(function() {
+    if ( $(this).attr('id') == ( graphytitle+typeofsort ) ) {
+      jump(( graphytitle+typeofsort ));
+      // $('html, body').animate({
+      //   scrollTop: $( "#"+ (graphytitle+typeofsort )).offset().top
+      // }, 1000);
+      breakexecution = true;
+      return;
+    }
+  });
+  if (breakexecution) {
+    e.preventDefault();
+    return;
+  }
+
+  if (data != undefined) {
+  // d3.select("svg").remove();
+  $('body div#graphy').prepend('<p></p>');
+  var firstptag = $('body div#graphy p:first-child');
+  // firstptag.hide();
+  firstptag.animate({ "height": "toggle", "opacity": "toggle" });
+
 
     var tmp = Object.keys(data[0])
     var zipcode = tmp[0]
-    var gname = graphChanger($('select[name="fname"]').val());
+    var gname = graphChanger(gtitle);
     var value=tmp[gname == undefined ? 1 : gname];
     var name_of_column = value.replace(/_/g," ");
-    var typeofsort = $('select[name="typeofsort"]').val()
-    firstptag.append('<h2 class="graphytitle">' + name_of_column.toUpperCase() + ' SORT BY ' + typeofsort.toUpperCase() + '</h3>');
+    firstptag.append('<h2 class="graphytitle" id="' + graphytitle + typeofsort + '">' + name_of_column.toUpperCase() + ' SORT BY ' + typeofsort.toUpperCase() + '</h3>');
+    firstptag.append('<a class="myanchors" onclick="return false" href="#toptop"> <img src="/assets/toptop" alt="Back to Top"/> </a>');
     firstptag.append('<h3>' + tmp[0].toUpperCase() + '</h3>');
 
+    var mediawidnowlength = $(window).width();
     var m = [60, 10, 10, 60],
-        w = 800 - m[1] - m[3],
+        w = (mediawidnowlength <= 800 ? 800 : (mediawidnowlength-50))- m[1] - m[3],
         h = (15*data.length) - m[0] - m[2];
 
     var format = d3.format(",.0f");
@@ -64,6 +118,7 @@ $(function () {
         .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
 
     // Parse numbers, and sort by SCORE.
+    // converts to integer
     data.forEach(function(d) { d[value] = +d[value]; });
     if ( typeofsort == "value" ) {
       data.sort(function(a, b) { return b[value] - a[value]; });
@@ -72,9 +127,9 @@ $(function () {
     }
 
     // Set the scale domain.
-    x.domain([0, d3.max(data, function(d) { return d[value]; })]);
-    y.domain(data.map(function(d) { return d[zipcode]; }));
     var max = d3.max(data, function(d) { return d[value]; });
+    x.domain([0, max]);
+    y.domain(data.map(function(d) { return d[zipcode]; }));
 
     var bar = svg.selectAll("g.bar")
         .data(data)
@@ -103,10 +158,20 @@ $(function () {
     svg.append("g")
         .attr("class", "y axis")
         .call(yAxis);
-  });
+
+  // firstptag.fadeIn(2000);
+  // firstptag.show("slow");
+
+  firstptag.animate({ "height": "toggle", "opacity": "toggle" }, 2000);
+  }
   e.preventDefault();
   });
+ $(document).delegate('a.myanchors','click', function (e) {
+     jump('toptop');
+    e.preventDefault();
+ });
 });
+
 // $(document).ready(function() {
 //   window.restaurant_average_score = {};
 //   $.ajax({

@@ -1,37 +1,42 @@
-<h1>This will be our About Page.</h1>
-<h1>Stuff here, testing</h1>
+<header id="myheader">
+  <h1 id="toptop" style="font-size: 3.2em">Give me a title and i'll be happy</h1>
+  <h1><ul><p>Can somebody write me a description please.</p></ul></h1>
 
   <%# for (var prop in window.restaurant_average_score) { %>
-  <%#   tmp = {}; %>
-  <%#   tmp['x'] = prop; %>
-  <%#   tmp['y'] = window.restaurant_average_score[prop]; %>
-  <%#   items.push(tmp); %>
-  <%# } %>
-<%# <%= javascript_include_tag "https://d3js.org/d3.v4.min.js" %1> %>
+    <%#   tmp = {}; %>
+    <%#   tmp['x'] = prop; %>
+    <%#   tmp['y'] = window.restaurant_average_score[prop]; %>
+    <%#   items.push(tmp); %>
+    <%# } %>
+    <%# <%= javascript_include_tag "https://d3js.org/d3.v4.min.js" %1> %>
+    <form id="form1">
+      <select name="fname">
+        <option value="Graffiti Complaints">Graffiti Complaints</option>
+        <option value="Heating Complaints">Heating Complaints</option>
+        <option value="Illegal Parking Complaints">Illegal Parking Complaints</option>
+        <option value="Noise Complaints">Noise Complaints</option>
+        <option value="Restaurant Average Score">Restaurant Average Score</option>
+        <option value="Streetlight Complaints">Streetlight Complaints</option>
+        <option value="Amount Of Trees">Amount Of Trees</option>
+      </select>
+      <select name="typeofsort">
+        <option value="zipcode">Sort by Zipcode</option>
+        <option value="value">Sort by Value</option>
+      </select>
+      <button type="submit" form="form1" value="Submit">Click Me!</button>
+      <%= button_to "Refresh",  { controller: "about",action: "index"}, method: :get, data: { confirm: "All your fancy graphs will be gone! Are you sure?" } %>
+    </form>
+  </header>
 
-<form id="form1">
-  <select name="fname">
-    <option value="Graffiti Complaints">Graffiti Complaints</option>
-    <option value="Heating Complaints">Heating Complaints</option>
-    <option value="Illegal Parking Complaints">Illegal Parking Complaints</option>
-    <option value="Noise Complaints">Noise Complaints</option>
-    <option value="Restaurant Average Score">Restaurant Average Score</option>
-    <option value="Streetlight Complaints">Streetlight Complaints</option>
-    <option value="Amount Of Trees">Amount Of Trees</option>
-  </select>
-  <select name="typeofsort">
-    <option value="zipcode">Sort by Zipcode</option>
-    <option value="value">Sort by Value</option>
-  </select>
-  <button type="submit" form="form1" value="Submit">Click Me!</button>
-</form>
 
-
-<%= button_to "Refresh",  { controller: "about",action: "index"}, method: :get, data: { confirm: "Are you sure?" } %>
-
-<meta charset="utf-8">
 
 <style>
+
+header#myheader {
+    text-align: center;
+    font-size: 3em;
+    width: 100%;       /* use something sensible as the default value */
+}
 
 body {
   font: 10px sans-serif;
@@ -62,16 +67,16 @@ body {
   stroke: black;
 }
 
+.graphytitle {
+  text-align: center;
+}
+
+.myanchors {
+  float: right;
+}
 </style>
-
-<script src="//d3js.org/d3.v3.min.js"></script>
-<%# <script> %>
-
-
-
-
-<%# </script> %>
-
+<%= javascript_include_tag "d3.v3.min.js" %>
+ 
 <div id="graphy">
   
 </div>

@@ -58,7 +58,6 @@ class HomeController < ApplicationController
       x << row[params[:term1]].to_i
       y << row[params[:term2]].to_i
     end
-
     up = UniPre.new(x, y)
     up.n
     up.theta
@@ -66,6 +65,10 @@ class HomeController < ApplicationController
 
   def getfile
     @file = params[:file]
+  end
+
+  def splash
+    render 'splash'
   end
 
 end
