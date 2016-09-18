@@ -21,7 +21,7 @@ var load = function (n1, n2) {
     dataType: "text",
     success: function(data) {
       //array of hashes corresponding to each header
-      parsedData = dsvFormat(data).parse;
+      parsedData = d3.csvParse(data);
       //n1 and n2 are the dropdown options currently selected (0-7, here)
       firstData = Object.keys(parsedData[0])[n1];
       secondData = Object.keys(parsedData[0])[n2];
