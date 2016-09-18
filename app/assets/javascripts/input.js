@@ -38,8 +38,21 @@ function jump(h){
 
 $(function () {
 
-
+  var shrink = true;
   $('form button').click(function(e) {
+
+  if (shrink) {
+    $("header#myheader ul").wrap("<li></li>");
+    $("header#myheader").animate({
+      width: "50%",
+      "textAlign":"left",
+      "font-size":"1em"
+    },1000);
+    $("header#myheader").css({"textAlign":"left"});
+    // $("header#myheader").animate(function() { $("header#myheader").css({"textAlign":"left"})},1000);
+    shrink = false;
+  }
+
   var gtitle = $('select[name="fname"]').val();
   var graphytitle = gtitle.replace(/\s/g,"").toLowerCase();
   var typeofsort = $('select[name="typeofsort"]').val()
