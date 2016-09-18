@@ -18,7 +18,7 @@ class UniPre
 		self.x = Matrix.rows(r) 
 	end
 
-	def h(target, theta0=0)  # should use optimal value for theta0
+	def h(target, theta0=0.1)  # should use optimal value for theta0
 		theta0 + self.theta * target
 	end
 
