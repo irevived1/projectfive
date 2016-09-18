@@ -3,7 +3,7 @@
 <div class="jumbotron">
   <h1>New York, visualized</h1>
   <hr class="m-y-2">
-  <p class="lead">Now comparing <select name="first" class="dropdown-toggle"></select> and <select name="second" class="dropdown-toggle"></select> in this data.</p>
+  <p class="lead">Now comparing <select name="first" class="dropdown-toggle"></select> and <select name="second" class="dropdown-toggle"></select> in this dataset.</p>
 </div>
 <!--
 <div class="row">
@@ -24,7 +24,8 @@
 </div>
 
 <div class="row">
-  <div id="bar-graphs">
+  <div id="graphy">
+
   </div>
 </div>
 
@@ -35,4 +36,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.15.0/lodash.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tipsy/1.0.3/jquery.tipsy.min.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<!-- <%= javascript_include_tag "d3.v3.min.js" %> -->
 <%= javascript_include_tag 'scatter' %>
+<%= javascript_include_tag 'input' %>

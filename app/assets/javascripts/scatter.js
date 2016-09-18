@@ -14,14 +14,14 @@ keys.forEach(function (key, index) {
   $('select').append("<option value=" + index + ">" + key + "</option>");
 })
 
-var data = function (n1, n2) {
+var load = function (n1, n2) {
   $.ajax({
     type: "GET",
     url: "/assets/master.csv",
     dataType: "text",
     success: function(data) {
       //array of hashes corresponding to each header
-      parsedData = d3.csvParse(data);
+      parsedData = dsvFormat(data).parse;
       //n1 and n2 are the dropdown options currently selected (0-7, here)
       firstData = Object.keys(parsedData[0])[n1];
       secondData = Object.keys(parsedData[0])[n2];
@@ -37,7 +37,7 @@ $('select').change(function () {
   d3.select('svg').remove();
   var first = $('select')[0].value;
   var second  = $('select')[1].value;
-  data(first, second);
+  load(first, second);
 })
 
 // function getSecondDataSet (firstDataset) {
