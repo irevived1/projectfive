@@ -25,7 +25,7 @@
               <div class="col-md-4">
               <h2>Prediction Line Chart</h3><br>
               <p>This line chart shows the relationship between two related features. It can be used to predict the value of y from the value of x. It reads a dataset, and, by implementing a normal equation, predicts the reasonable value of y based on the dataset. Also, you can upload your own CSV dataset. For calculation, I use the Ruby classes Matrix, Vector, and Rational.</p>
-                <img src="assets/prediction_l.svg" alt="Prediction" width="330px" height="300px">
+                <img src="assets/prediction_l.svg" alt="Prediction" width="330px" height="300px"> 
               </div><!-- Heading -->
 
 
@@ -35,6 +35,7 @@
                   <li>
                     <h4>Algorithm Selection</h4>
                     <p>I use a normal equation to calculate the reasonable y from x based on a dataset. I tried to implement a regression eqution with a descent function, but, in Ruby, it is difficult to implement the complex functions. Using a normal equation is not the best approach for prediction, but, in Ruby, it is efficient on big datasets and I do not need to iterate the datasets. I found several Ruby classes(Matrix, Vector, Rational) which helps me to implement the equation. I wrote a class UniPre.rb which takes two arrays(x, y) which must be in the same order and gives you a optimal value(T) for prediction.</p>
+                    <img src="assets/equation.png" alt="Equation" width="150px" height="40px">     (X is the x values of samples. y is the y values of samples.)
                   </li>
                   <li>
                     <h4>Model Selection</h4>
