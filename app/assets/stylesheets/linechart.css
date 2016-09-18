@@ -73,7 +73,32 @@ body {
 
 
 
+/* Pie Chart */
+@import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic);
 
+
+#chartsvg {
+  width: 500px;
+  height: 500px;
+  margin: 0 auto;
+
+   text.middle {
+    font-family: Lato;
+    font-weight: 300;
+    font-size: 24px;
+  }
+  
+  .nvd3.nv-pie .nv-pieLabels text {
+    font-family: Lato;
+    font-size: 18px;
+    font-weight: 300;
+    fill: #fff !important;
+  }
+
+  g.nv-slice {
+  	color: white;
+  }
+}
 
 
 
