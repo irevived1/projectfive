@@ -1,3 +1,4 @@
+var data = undefined;
 function shiftvalue(input,max) {
   // var length = count_digit(input);
   // length = length + Math.floor((length-1)/3);
@@ -27,6 +28,10 @@ function graphChanger(input) {
   return hash[input];
 }
 
+function setglob(tmp) {
+  data = tmp;
+}
+
 function jump(h){
     // var url = location.href;               //Save down the URL without hash.
     // location.href = "#"+h;                 //Go to the target element.
@@ -37,6 +42,10 @@ function jump(h){
 }
 
 $(function () {
+  d3.csv("/assets/master.csv", function(error, data) {
+    if (error) throw error;
+    setglob(data);
+  });
 
   var shrink = true;
   $('form button').click(function(e) {
@@ -72,13 +81,13 @@ $(function () {
     return;
   }
 
+  if (data != undefined) {
   // d3.select("svg").remove();
   $('body div#graphy').prepend('<p></p>');
   var firstptag = $('body div#graphy p:first-child');
   // firstptag.hide();
   firstptag.animate({ "height": "toggle", "opacity": "toggle" });
-  d3.csv("/assets/master.csv", function(error, data) {
-    if (error) throw error;
+
 
     var tmp = Object.keys(data[0])
     var zipcode = tmp[0]
@@ -150,14 +159,13 @@ $(function () {
         .attr("class", "y axis")
         .call(yAxis);
 
-  });
   // firstptag.fadeIn(2000);
   // firstptag.show("slow");
 
   firstptag.animate({ "height": "toggle", "opacity": "toggle" }, 2000);
+  }
   e.preventDefault();
   });
-
  $(document).delegate('a.myanchors','click', function (e) {
      jump('toptop');
     e.preventDefault();
