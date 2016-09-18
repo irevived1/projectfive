@@ -200,7 +200,7 @@ function buildChart (dataset, firstData, secondData) {
     .attr("cy", function(d) {
       return y(parseInt(d[1]));
     })
-    .attr("opacity", .5)
+    .attr("opacity", .7)
     .style("fill", function(d) {
       if (d[0] > d[1]) {
 	return firstColor;

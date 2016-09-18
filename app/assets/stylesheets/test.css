@@ -11,8 +11,7 @@ select {
 .axis path,
 .axis line{
   fill: none;
-    stroke: #6395AA;
-		stroke-opacity: .2;
+    stroke: white;
     shape-rendering: crispEdges;
 }
 
