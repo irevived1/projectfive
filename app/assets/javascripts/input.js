@@ -44,7 +44,6 @@ $(function () {
   if (shrink) {
     $("header#myheader ul").wrap("<li></li>");
     $("header#myheader").animate({
-      width: "50%",
       "textAlign":"left",
       "font-size":"1em"
     },1000);
