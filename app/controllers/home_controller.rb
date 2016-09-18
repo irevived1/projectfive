@@ -16,12 +16,15 @@ class HomeController < ApplicationController
 
 		up = UniPre.new(x, y)
 		up.n
-		
     @theta = up.theta
   end
 
   def chloropleth
     render 'chloropleth'
+  end
+
+  def splash
+    render 'splash'
   end
 
 end

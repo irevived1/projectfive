@@ -1,0 +1,60 @@
+body {
+		padding-top: 70px;
+		font-size: 16px;
+		font-family: "Open Sans",serif;
+    background-color: #A53D2B;
+}
+
+h1 {
+	font-family: 'Abel', sans-serif;
+	font-weight: 400;
+	font-size: 50px;
+}
+
+p {
+  font-size: 24px;
+}
+
+.margin-base-vertical {
+	margin: 70px 0;
+}
+
+.landing {
+    text-align: center;
+    color: #f8f8f8;
+}
+
+.btn {
+  background-color: #0B2E4C;
+  border-color: #0B2E4C;
+  font-size: 15px;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+#bar-graphs {
+  background-color: white;
+}
+
+.icon-circ {
+  text-align: center;
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  padding: 20px;
+  background-color: #105D6D;
+}
+
+.icon-div {
+  max-width: 120px;
+  display: inline-block;
+  padding: 20px;
+}
+
+.fa {
+  padding: 5px;
+}
+
+.row {
+  padding: 15px;
+}
