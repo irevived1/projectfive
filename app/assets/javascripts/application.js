@@ -13,8 +13,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require d3.v3.min
+<<<<<<< HEAD
 //= require turbolinks
 //= require linechart/linechartImp.js
 //= require linechart/linechartShow.js
+=======
+>>>>>>> 96a02c3a49584be1823dd32bc79dc909802abf50
 //= require_tree .
 //= require bootstrap.min.js
