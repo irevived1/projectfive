@@ -291,7 +291,35 @@ function buildPieChart(parsedData, firstData, secondData) {
 
 }
 
+// Seed data to populate donut pie chart
+function dataForPieChart(data, term1, term2) {
+    var maxX = Math.max.apply(Math, data.map(function(o){
+      return o[term1];
+    }));
 
+    var minX = Math.min.apply(Math, data.map(function(o){
+      return o[term1];
+    }));
+
+    var maxY = Math.max.apply(Math, data.map(function(o){
+      return o[term2];
+    }));
+
+    var minY = Math.min.apply(Math, data.map(function(o){
+      return o[term2];
+    }));
+
+  return [
+    {
+      "label": term1,
+      "value": (maxX - minX) / 2
+    },
+    {
+      "label": term2,
+      "value": (maxY - minY) / 2
+    }
+  ];
+}
 
 </script>
     
