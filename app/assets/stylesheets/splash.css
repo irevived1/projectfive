@@ -1,11 +1,8 @@
 body {
+		padding-top: 70px;
+		font-size: 16px;
+		font-family: "Arial",sans-serif;
     background-color: #FCFAF2;
-}
-
-select {
-	color: white;
-	background-color: #5D2E46;
-	border-color: #5D2E46;
 }
 
 .axis path,
@@ -20,25 +17,23 @@ select {
 	fill: #6395AA;
 }
 
-.jumbotron {
-	padding: 20px;
-	background-color: #A53D2B;
-	color: white;
-}
-
-.jumbotron h1 {
+h1 {
 	font-family: 'Abel', sans-serif;
 	font-weight: 400;
 	font-size: 50px;
-	text-align: center;
-	padding: 8px;
 }
 
-.jumbotron p {
-	padding-top: 10px;
-	font-family: 'Open Sans', sans-serif;
-	font-size: 20px;
-	text-align: center;
+p {
+  font-size: 24px;
+}
+
+.margin-base-vertical {
+	margin: 70px 0;
+}
+
+.landing {
+    text-align: center;
+    color: #632B1F;
 }
 
 .btn {
@@ -52,7 +47,7 @@ select {
 #bar-graphs {
   background-color: white;
 }
-/*
+
 .icon-circ {
   text-align: center;
   height: 100px;
@@ -60,7 +55,7 @@ select {
   border-radius: 50%;
   padding: 20px;
   background-color: #105D6D;
-}*/
+}
 
 .icon-div {
   max-width: 120px;
@@ -74,11 +69,6 @@ select {
 
 .row {
   padding: 15px;
-}
-
-.option-display{
-  display: flex;
-  justify-content: space-between;
 }
 
 #scatter-plot {

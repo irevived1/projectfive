@@ -3,7 +3,7 @@
 # Version of your assets, change this if you want to expire all your assets.
 Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w(input.js d3.v3.min.js scatter.js)
-Rails.application.config.assets.precompile += %w( test.css bootstrap.min.css)
+Rails.application.config.assets.precompile += %w( test.css bootstrap.min.css font-awesome.css splash.css)
 
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path
