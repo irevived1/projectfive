@@ -38,6 +38,9 @@ function jump(h){
 }
 
 $(function () {
+  var filename = $("#file").data("file");
+  
+  $('h1#toptop').html((filename ? capitalizeEachWord(filename.replace(/_/," ")) : "New York")+", visualized")
 
   $("header#myheader p").animate({
     "font-size":"1.8em"
@@ -49,7 +52,7 @@ $(function () {
   $("input").animate({
     "font-size":"1em"
   },1000);
-  d3.csv("/assets/master.csv", function(error, data) {
+  d3.csv(("/assets/" + (filename ? filename : "master.csv")), function(error, data) {
     if (error) throw error;
     setglob(data);
     keys = Object.keys(data[0]);
