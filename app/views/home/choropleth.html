@@ -1,0 +1,45 @@
+<svg width="960" height="600"></svg>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script type="text/javascript">
+
+    var svg = d3.select("svg");
+    width = +svg.attr("width");
+    height = +svg.attr("height");
+
+    var rateById = d3.map();
+
+    var quantize = d3.scaleQuantize()
+    .domain([0, 0.15])
+    .range(d3.range(9).map(function(i) { return "q" + i + "-9"; }));
+
+    var projection = d3.geoAlbersUsa()
+    .scale(1280)
+    .translate([width / 2, height / 2]);
+
+    var path = d3.geoPath()
+    .projection(projection);
+
+    d3.queue()
+    .defer(d3.json, "/assets/data/zips.json")
+    .defer(d3.csv, "/assets/master.csv", function(d) { rateById.set(d.id, +d.rate); })
+    .await(ready);
+
+  function ready(error, us) {
+  if (error) throw error;
+
+  svg.append("g")
+      .attr("class", "counties")
+    .selectAll("path")
+      .data(topojson.feature(us, us.objects.counties).features)
+    .enter().append("path")
+      .attr("class", function(d) { return quantize(rateById.get(d.id)); })
+      .attr("d", path);
+
+  svg.append("path")
+      .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
+      .attr("class", "states")
+      .attr("d", path);
+}
+
+
+</script>

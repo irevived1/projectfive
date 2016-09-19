@@ -108,7 +108,6 @@ $(function () {
 
     var xAxis = d3.svg.axis().scale(x).orient("top").tickSize(-h),
         yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0);
-        debugger;
 
     var svg = d3.select("body div#graphy p:first-child").append("svg")
         .attr("width", w + m[1] + m[3])

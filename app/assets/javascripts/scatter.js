@@ -242,15 +242,22 @@ function buildChart (dataset, firstData, secondData) {
     .style('fill', '#6395AA')
     .text(secondData);
 
+
+  var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return firstData + ": " + d[0] + "<br>" + secondData + ": " + d[1] + "<br>zipcode: " + d[2] +"<br/>"  });
+
   //Tipsy, to display the values
-  $('svg circle').tipsy({
-    fade: true,
-    gravity: 'w',
-    html: true,
-    trigger: 'focus',
-    title: function() {
-      d = this.__data__;
-      return firstData + ": " + d[0] + "<br>" + secondData + ": " + d[1] + "<br>zipcode: " + d[2] +"<br/>"
-    }
-  });
+//   $('svg circle').tipsy({
+//     fade: true,
+//     gravity: 'w',
+//     html: true,
+//     trigger: 'focus',
+//     title: function() {
+//       d = this.__data__;
+//
+//     }
+//   });
 }
