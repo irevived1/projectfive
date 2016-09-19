@@ -10,7 +10,7 @@ require "#{Rails.root}/lib/UniPre.rb"
 require "#{Rails.root}/lib/FileDataCache.rb"
 # -- end
 
-Rails.application.config.assets.precompile += %w(input.js d3.v3.min.js scatter.js bargraph.js)
+Rails.application.config.assets.precompile += %w(input.js d3.v3.min.js scatter.js) 
 Rails.application.config.assets.precompile += %w( test.css bootstrap.min.css font-awesome.css splash.css)
 
 
