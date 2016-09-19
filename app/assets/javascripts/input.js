@@ -117,6 +117,8 @@ $(function () {
     var zipcode = keys[0];
     var value=graphytitle;
     var name_of_column = value.replace(/_/g," ");
+
+    firstptag.append('<hr class="m-y-2"/>');
     firstptag.append('<h2 class="graphytitle" id="' + graphytitle + typeofsort + '">' + name_of_column.toUpperCase() + ' SORT BY ' + typeofsort.toUpperCase() + '</h3>');
     // firstptag.append('<a class="myanchors" onclick="return false" href="#toptop"> <img src="/assets/toptop" alt="Back to Top"/> </a>');
     firstptag.append('<h3>&nbsp;&nbsp;&nbsp;' + keys[0].toUpperCase() + '</h3>');
