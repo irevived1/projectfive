@@ -1,6 +1,5 @@
 body {
 		padding-top: 70px;
-<<<<<<< HEAD
 		/*font-size: 16px;
 		font-family: "Arial",sans-serif;*/
     background-color: #FCFAF2;
@@ -19,20 +18,12 @@ body {
 }
 
 .landing h1 {
-=======
-		font-size: 16px;
-		font-family: "Open Sans",sans-serif;
+		font-size: 50px;
+		font-family: "Abel",sans-serif;
     background-color: #FCFAF2;
 }
 
-h1 {
->>>>>>> upload-page
-	font-family: 'Abel', sans-serif;
-	font-weight: 400;
-	font-size: 50px;
-}
-
-h2 {
+.hero-bar h2 {
 	font-family: 'Abel', sans-serif;
 	font-weight: 400;
 	font-size: 35px;
@@ -60,10 +51,6 @@ p {
   margin: 0 auto;
 }
 
-<<<<<<< HEAD
-#bar-graphs {
-  background-color: white;
-=======
 .icon-circ {
   text-align: center;
   height: 100px;
@@ -71,7 +58,6 @@ p {
   border-radius: 50%;
   padding: 20px;
   background-color: #105D6D;
->>>>>>> upload-page
 }
 
 .icon-div {
