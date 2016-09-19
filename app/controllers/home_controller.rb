@@ -83,6 +83,15 @@ class HomeController < ApplicationController
     render 'bargraph'
   end  
 
+  def start
+    @@FileDataCache.destroy
+    render 'start'
+  end
+
+  def splash
+    render 'splash'
+  end
+
   private
 
   def calculateTheta(fileData)
@@ -101,14 +110,9 @@ class HomeController < ApplicationController
     @file = params[:file]
   end
 
-  def splash
-    render 'splash'
-  end
+  
 
-  def start
-    @@FileDataCache.destroy
-    render 'start'
-  end
+  
 
 
 end
