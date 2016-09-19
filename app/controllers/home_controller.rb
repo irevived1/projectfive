@@ -5,7 +5,7 @@ class HomeController < ApplicationController
   @@FileDataCache = FileDataCache.instance
 
   def index
-    @@FileDataCache.filename
+    @filename = @@FileDataCache.filename
   end
 
   def display
@@ -16,7 +16,8 @@ class HomeController < ApplicationController
   end
 
   def linechart
-    @@FileDataCache.destroy
+    @headers = @@FileDataCache.headers if @@FileDataCache.headers
+    # @@FileDataCache.destroy
   end
 
   def drawLineChart
@@ -49,6 +50,7 @@ class HomeController < ApplicationController
   end
 
   def homeUploadCSV
+
     if @file
       csv_text = File.read(@file.path)
       @file_data = CSV.parse(csv_text, :headers => true)
@@ -64,6 +66,7 @@ class HomeController < ApplicationController
       File.open("app/assets/csv/" + @file.original_filename, 'w+') do |f|
         f.write(csv_text)
       end
+      #redirect_to :start
       render :start
     end
   end
@@ -91,12 +94,12 @@ class HomeController < ApplicationController
   end
 
   def start
-    @@FileDataCache.destroy
+    @filename = @@FileDataCache.destroy
     render 'start'
   end
 
   def bargraph
-    @@FileDataCache.filename
+    @filename = @@FileDataCache.filename
     render 'bargraph'
   end  
 
