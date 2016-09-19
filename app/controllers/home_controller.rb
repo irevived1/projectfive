@@ -20,11 +20,13 @@ class HomeController < ApplicationController
   end
 
   def linechart
+    FileDataCache.instance.hideAbout = false;
     @headers = @@FileDataCache.headers if @@FileDataCache.headers
     # @@FileDataCache.destroy
   end
 
   def drawLineChart
+    FileDataCache.instance.hideAbout = true;
     @term1 = params[:term1]
     @term2 = params[:term2]
     @filename = @@FileDataCache.filename
