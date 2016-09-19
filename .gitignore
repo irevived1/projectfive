@@ -25,3 +25,4 @@
 *.swp
 
 /app/.DS_Store
+*/.DS_Store
