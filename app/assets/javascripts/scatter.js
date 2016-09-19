@@ -1,5 +1,5 @@
 var keys, url;
-
+var filename;
 var filename = $("#file").data("file");
 
 if (filename !== "") {
@@ -19,9 +19,11 @@ var load = function (n1, n2) {
       firstData = Object.keys(parsedData[0])[n1];
       secondData = Object.keys(parsedData[0])[n2];
       keys = Object.keys(parsedData[0]);
-      if (keys.length > $('select.splot')[0].length ) {
+      if (keys.length - 1 > $('select.splot')[0].length ) {
         keys.forEach(function (key, index) {
-          $('select').append("<option value=" + index + ">" + capitalizeEachWord(key.replace(/_/g," ")) + "</option>");
+	  if (key !== "") {
+	    $('select').append("<option value=" + index + ">" + capitalizeEachWord(key.replace(/_/g," ")) + "</option>");
+	  }
         })
       }
       buildChart(parsedData, firstData, secondData);

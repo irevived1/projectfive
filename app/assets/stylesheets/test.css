@@ -86,3 +86,9 @@ select {
   margin-right: auto;
   display: block;
 }
+
+.tipsy {
+  background-color: #5D2E46;
+  color: white;
+  text-align: center;
+}

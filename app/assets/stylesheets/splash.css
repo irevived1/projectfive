@@ -95,3 +95,18 @@ p {
 .hero-upload form {
 	margin: 0 auto;
 }
+
+.link-list {
+	margin: 0 auto;
+	color: black;
+	text-align: center;
+}
+
+.link-list h2 {
+	font-size: 35px;
+	padding-bottom: 13px;
+}
+
+.link-list p {
+	font-size: 18px;
+}

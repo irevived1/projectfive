@@ -7,6 +7,7 @@ class FileDataCache
     @file_data = nil
     @filename = nil
     @headers = nil
+    @hideAbout = false
   end
 
   def file_data=(file_data)
@@ -33,9 +34,18 @@ class FileDataCache
     @headers
   end
 
+  def hideAbout
+    @hideAbout
+  end
+
+  def hideAbout=(flag)
+    @hideAbout = flag
+  end
+
   def destroy
     @file_data = nil
     @filename = nil
     @headers = nil
+    @hideAbout = false
   end
 end
