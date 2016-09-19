@@ -26,15 +26,15 @@ body {
   margin-left: 150px;
 }
 .btn.btn-brown {
-	background: #d08166;
+	background: #5D2E46;
 	color: #ffffff;
-	border: 1px solid #c4613f;
+	border: 1px solid #5D2E46;
 }
 .btn.btn-brown:hover,
 .btn.btn-brown:focus,
 .btn.btn-brown.active,
 .btn.btn-brown:active {
-	background: #c4613f;
+	background: #673AB7;
 	color: #ffffff;
 }
 
