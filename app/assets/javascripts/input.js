@@ -55,12 +55,12 @@ $(function () {
   $('form button').click(function(e) {
 
   if (shrink) {
-    $("header#myheader ul").wrap("<li></li>");
+    // $("header#myheader ul").wrap("<li></li>");
     $("header#myheader").animate({
       "textAlign":"left",
       "font-size":"1em"
     },1000);
-    $("header#myheader").css({"textAlign":"left"});
+    // $("header#myheader").css({"textAlign":"left"});
 
     $('#floatingbottom').append('<a class="myanchors" onclick="return false" href="#toptop"> <img src="/assets/toptop" alt="Back to Top"/> </a>');
     // $("header#myheader").animate(function() { $("header#myheader").css({"textAlign":"left"})},1000);
@@ -99,7 +99,7 @@ $(function () {
     var name_of_column = value.replace(/_/g," ");
     firstptag.append('<h2 class="graphytitle" id="' + graphytitle + typeofsort + '">' + name_of_column.toUpperCase() + ' SORT BY ' + typeofsort.toUpperCase() + '</h3>');
     // firstptag.append('<a class="myanchors" onclick="return false" href="#toptop"> <img src="/assets/toptop" alt="Back to Top"/> </a>');
-    firstptag.append('<h3>' + keys[0].toUpperCase() + '</h3>');
+    firstptag.append('<h3>&nbsp;&nbsp;&nbsp;' + keys[0].toUpperCase() + '</h3>');
 
     var mediawidnowlength = $(window).width();
     var m = [60, 10, 10, 60],

@@ -2,13 +2,46 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-body {
-  // background-color: #0086b3;
-  background-color: #fff;
+
+#floatingbottom {
+  position: fixed;
+  bottom: 0;
+  right: 0;
 }
 
-body text {
-  color: white;
+header#myheader {
+    text-align: center;
+    font-size: 3em;
+    width: 100%;       /* use something sensible as the default value */
+}
+
+body {
+  font: 10px sans-serif;
+}
+
+.bar rect {
+  fill: #33A1FD;
+}
+
+.bar text.value {
+  fill: black;
+}
+
+.axis {
+  shape-rendering: crispEdges;
+}
+
+.axis path {
+  fill: none;
+}
+
+.x.axis line {
+  stroke: #fff;
+  stroke-opacity: .8;
+}
+
+.y.axis path {
+  stroke: black;
 }
 
 .graphytitle {
@@ -18,4 +51,3 @@ body text {
 .myanchors {
   float: right;
 }
-

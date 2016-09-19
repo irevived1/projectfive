@@ -1,6 +1,9 @@
-<header id="myheader">
-  <h1 id="toptop" style="font-size: 3.2em">Give me a title and i'll be happy</h1>
-  <h1><ul><p>Can somebody write me a description please.</p></ul></h1>
+<%= stylesheet_link_tag "/assets/home.css" %>
+<%= stylesheet_link_tag "/assets/test.css" %>
+<header id="myheader" class="jumbotron">
+  <h1 id="toptop" style="font-size: 3.2em">blh</h1>
+  <hr class="m-y-2"/>
+  <h1><p>Can somebody write me a description please.</p></h1>
 
   <%# for (var prop in window.restaurant_average_score) { %>
     <%#   tmp = {}; %>
@@ -29,57 +32,6 @@
   </header>
 
 
-
-<style>
-  #floatingbottom {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-  }
-
-header#myheader {
-    text-align: center;
-    font-size: 3em;
-    width: 100%;       /* use something sensible as the default value */
-}
-
-body {
-  font: 10px sans-serif;
-}
-
-.bar rect {
-  fill: steelblue;
-}
-
-.bar text.value {
-  fill: black;
-}
-
-.axis {
-  shape-rendering: crispEdges;
-}
-
-.axis path {
-  fill: none;
-}
-
-.x.axis line {
-  stroke: #fff;
-  stroke-opacity: .8;
-}
-
-.y.axis path {
-  stroke: black;
-}
-
-.graphytitle {
-  text-align: center;
-}
-
-.myanchors {
-  float: right;
-}
-</style>
 <%= javascript_include_tag "d3.v3.min.js" %>
 
 <div id="graphy">
