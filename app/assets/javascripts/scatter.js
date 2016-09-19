@@ -1,9 +1,18 @@
-var keys;
+var keys, url;
+
+var filename = $("#file").data("file");
+
+if (filename !== "") {
+  url = "/assets/" + filename; 
+  $('.jumbotron h1').html(capitalizeEachWord(filename.replace(/_/g," ")) + ", visualized");
+} else {
+  url = "/assets/master.csv";
+}
 
 var load = function (n1, n2) {  
   $.ajax({
     type: "GET",
-    url: "/assets/master.csv",
+    url: url,
     dataType: "text",
     success: function(data) {  
       parsedData = d3.csvParse(data);   

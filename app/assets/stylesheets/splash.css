@@ -89,5 +89,10 @@ p {
 }
 
 .hero-bar p {
-	  font-size: 18px;
+	font-size: 18px;
+}
+
+.hero-upload {
+	text-align: center;
+	margin: 0 auto;
 }
