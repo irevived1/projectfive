@@ -56,10 +56,13 @@ $(function () {
     if (error) throw error;
     setglob(data);
     keys = Object.keys(data[0]);
+    if (keys[keys.length-1] == "" ) {
+      keys.pop();
+    }
     // for (var i = 0, len = keys.length; i < len; i++) {
-    //   keys[i] = keys[i].replace(/ /g,"_");
+    //   keys[i] = keys[i].toLowerCase().replace(/\s/g,"_");
     // }
-
+// debugger;
     //add options
     for (var i = 1, len = keys.length; i < len; i++) {
       $('select#selecttype').append('<option value="' + keys[i] + '">'+ capitalizeEachWord(keys[i].replace(/_/g," ")) + '</option>');
