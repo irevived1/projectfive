@@ -24,7 +24,7 @@
         <%# <option value="value">Sort by Value</option> %>
       </select>
       <button type="submit" form="form1" value="Submit">Click Me!</button>
-      <%= button_to "Refresh",  { controller: "about",action: "index"}, method: :get, data: { confirm: "All your fancy graphs will be gone! Are you sure?" } %>
+      <%= button_to "Refresh",  { controller: "home",action: "bargraph"}, method: :get, data: { confirm: "All your fancy graphs will be gone! Are you sure?" } %>
     </form>
   </header>
 
@@ -64,7 +64,7 @@ body {
 }
 
 .x.axis line {
-  stroke: #fff; 
+  stroke: #fff;
   stroke-opacity: .8;
 }
 
@@ -81,8 +81,8 @@ body {
 }
 </style>
 <%= javascript_include_tag "d3.v3.min.js" %>
- 
+
 <div id="graphy">
-  
+
 </div>
 <div id="floatingbottom"></div>

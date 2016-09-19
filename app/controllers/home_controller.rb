@@ -73,6 +73,10 @@ class HomeController < ApplicationController
 
   def start
     render 'start'
-  end 
+  end
+
+  def bargraph
+    render 'bargraph'
+  end  
 
 end
