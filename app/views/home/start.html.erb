@@ -24,3 +24,25 @@
   </div>
 </div>
 </div>
+
+<div class="row">
+</div id="link-list">
+
+<% if @file %>
+
+<h2>Your graph links</h2>
+
+<p><%= link_to 'Bargraph', bargraph_path %></p>
+<p> <%= link_to 'Scatter plot', home_index_path %> </p>
+<p> <%= link_to 'Line chart', linechart_path %> </p>
+
+<% end %>
+</div>
+
+</div>
+
+<script type="text/javascript">
+  // $(':submit').on('click', function() {
+  //   $('#link_list').append("<h2>Your graphs</h2><p><a href='/bargraph'>Bargraph</a></p><p><a href='/home/index'>Scatter plot</a></p><p><a href='/linecahrt'>Linechart and analytics</a></p>");
+  // });
+</script>
