@@ -41,11 +41,34 @@
 <% if @file %>
 
 <h2>Your graph links</h2>
-
-<p><%= link_to 'Bar Graph', bargraph_path %></p>
-<p> <%= link_to 'Scatter plot', home_index_path %> </p>
-<p> <%= link_to 'Line chart', linechart_path %> </p>
-
+<div class="row">
+  <div class="link-container">
+  <div class="col-xs-6 col-md-3 link-thumb">
+    <a href="/bargraph" class="thumbnail">
+      <img src="assets/bar.png" alt="...">
+      <p>
+        Bar graph
+      </p>
+    </a>
+  </div>
+  <div class="col-xs-6 col-md-3 link-thumb">
+    <a href="/linechart" class="thumbnail">
+      <img src="assets/line.png" alt="...">
+      <p>
+        Line chart
+      </p>
+    </a>
+  </div>
+  <div class="col-xs-6 col-md-3 link-thumb">
+    <a href="/home/index" class="thumbnail">
+      <img src="assets/scatter.png" alt="...">
+      <p>
+        Scatter plot
+      </p>
+    </a>
+  </div>
+  </div>
+</div>
 <% end %>
 </div>
 
