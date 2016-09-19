@@ -1,7 +1,4 @@
 var data = undefined;
-var shrink = true;
-var keys = undefined;
-
 function shiftvalue(input,max) {
   // var length = count_digit(input);
   // length = length + Math.floor((length-1)/3);
@@ -18,10 +15,17 @@ function count_digit(input) {
   return String(input).length;
 }
 
-function capitalizeEachWord(str) {
-  return str.replace(/\w\S*/g, function(txt) {
-    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-  });
+function graphChanger(input) {
+  hash = {
+    "Graffiti Complaints":1,
+    "Heating Complaints":2,
+    "Illegal Parking Complaints":3,
+    "Noise Complaints":4,
+    "Restaurant Average Score":5,
+    "Streetlight Complaints":6,
+    "Amount Of Trees":7
+  };
+  return hash[input];
 }
 
 function setglob(tmp) {
@@ -41,18 +45,10 @@ $(function () {
   d3.csv("/assets/master.csv", function(error, data) {
     if (error) throw error;
     setglob(data);
-    keys = Object.keys(data[0]);
-
-    //add options
-    for (var i = 1, len = keys.length; i < len; i++) {
-      $('select#selecttype').append('<option value="' + keys[i] + '">'+ capitalizeEachWord(keys[i].replace(/_/g," ")) + '</option>');
-    }
-    $('select#sorttype').append('<option value="' + keys[0] + '">Sort by ' + keys[0] + '</option>');
-    $('select#sorttype').append('<option value="value">Sort by value</option>');
   });
 
-
-  $('form button').click(function(e) {
+  var shrink = true;
+  $('select').change(function (e) {
 
   if (shrink) {
     $("header#myheader ul").wrap("<li></li>");
@@ -64,9 +60,9 @@ $(function () {
     // $("header#myheader").animate(function() { $("header#myheader").css({"textAlign":"left"})},1000);
     shrink = false;
   }
-
-  var graphytitle = $('select[name="fname"]').val();
-  var typeofsort = $('select[name="typeofsort"]').val()
+  var gtitle = $('select[name="first"] :selected').text();
+  var graphytitle = gtitle.replace(/_/g,"").toLowerCase();
+  var typeofsort = "zipcode";
 
   var breakexecution = false;
   $('.graphytitle').each(function() {
@@ -87,16 +83,18 @@ $(function () {
   if (data != undefined) {
   // d3.select("svg").remove();
   $('body div#graphy').prepend('<p></p>');
-  var firstptag = $('body div#graphy p:first-child');
-  // firstptag.hide();
-  firstptag.animate({ "height": "toggle", "opacity": "toggle" });
-
-    var zipcode = keys[0];
-    var value=graphytitle;
+    var firstptag = $('body div#graphy p:first-child');
+    // firstptag.hide();
+    firstptag.animate({ "height": "toggle", "opacity": "toggle" });
+    //headers defined here
+    var tmp = Object.keys(data[0])
+    var zipcode = tmp[0];
+    var gname = parseInt($('select[name="first"] :selected').val());
+    var value = tmp[gtitle == undefined ? 1 : gname];
     var name_of_column = value.replace(/_/g," ");
     firstptag.append('<h2 class="graphytitle" id="' + graphytitle + typeofsort + '">' + name_of_column.toUpperCase() + ' SORT BY ' + typeofsort.toUpperCase() + '</h3>');
     firstptag.append('<a class="myanchors" onclick="return false" href="#toptop"> <img src="/assets/toptop" alt="Back to Top"/> </a>');
-    firstptag.append('<h3>' + keys[0].toUpperCase() + '</h3>');
+    firstptag.append('<h3>' + tmp[0].toUpperCase() + '</h3>');
 
     var mediawidnowlength = $(window).width();
     var m = [60, 10, 10, 60],
@@ -110,6 +108,7 @@ $(function () {
 
     var xAxis = d3.svg.axis().scale(x).orient("top").tickSize(-h),
         yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0);
+        debugger;
 
     var svg = d3.select("body div#graphy p:first-child").append("svg")
         .attr("width", w + m[1] + m[3])
