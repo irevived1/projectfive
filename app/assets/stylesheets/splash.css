@@ -103,10 +103,12 @@ p {
 }
 
 .link-list h2 {
+	font-family: "Abel", sans-serif;
 	font-size: 35px;
 	padding-bottom: 13px;
 }
 
 .link-list p {
+	font-family: "Open Sans", sans-serif;
 	font-size: 18px;
 }
