@@ -35,7 +35,7 @@ body::before {
   display: none;
 }
 
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 640px) {
   body::before {
     content: 'desktop';
   }
@@ -242,7 +242,7 @@ body.dark #hamburger:not(.open) span {
   margin-top: 10%;
 }
 
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 640px) {
   .section {
     height: 100vh;
   }
@@ -278,7 +278,7 @@ body.dark #hamburger:not(.open) span {
   min-height: 50vh;
 }
 
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 640px) {
 
   .section:first-of-type .container-fluid {
     height: 100vh;
@@ -381,7 +381,7 @@ body.dark #hamburger:not(.open) span {
   transition: opacity .2s 0s, visibility 0s .2s;
 }
 
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 640px) {
   #vertical-nav {
     display: block;
   }
@@ -504,7 +504,7 @@ body.dark #hamburger:not(.open) span {
   }
 }
 
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 640px) {
   .content {
     padding: 5px 90px;
   }
