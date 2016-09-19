@@ -69,6 +69,13 @@ class HomeController < ApplicationController
       @@FileDataCache.filename = @file.original_filename
       @@FileDataCache.headers = @headers
 
+      tmp = csv_text[0..csv_text.index("\n")]
+      tmp = tmp.downcase
+      tmp.chars.each_with_index do | var , i |
+        csv_text[i] = "_" if tmp[i] == " "
+      end
+
+      
       File.open("app/assets/csv/" + @file.original_filename, 'w+') do |f|
         f.write(csv_text)
       end
