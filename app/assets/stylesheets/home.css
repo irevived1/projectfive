@@ -21,6 +21,7 @@ body {
 
 .bar rect {
   fill: #33A1FD;
+  /* fill: #FDCA40 */
 }
 
 .bar text.value {

@@ -16,8 +16,6 @@ class HomeController < ApplicationController
   end
 
   def linechart
-    # @@FileDataCache.filename = nil
-    # @@FileDataCache.file_data = nil
     @@FileDataCache.destroy
   end
 
@@ -93,6 +91,7 @@ class HomeController < ApplicationController
   end
 
   def start
+    @@FileDataCache.destroy
     render 'start'
   end
 
