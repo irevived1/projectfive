@@ -51,6 +51,14 @@ p {
   margin: 0 auto;
 }
 
+.hero-bar .btn {
+	background-color: #5D2E46;
+  border-color: #5D2E46;
+  font-size: 15px;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
 .icon-circ {
   text-align: center;
   height: 100px;

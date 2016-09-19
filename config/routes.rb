@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'home/index'
 
-  root to: "about#index"
+  root to: "home#splash"
   post 'display' => 'home#display'
 	get 'linechart' => 'home#linechart'
 	post 'linechart' => 'home#drawLineChart'
