@@ -316,11 +316,11 @@ function dataForPieChart(data, term1, term2) {
   return [
     {
       "label": term1,
-      "value": (maxX - minX) / 2
+      "value": (maxX + minX) / 2
     },
     {
       "label": term2,
-      "value": (maxY - minY) / 2
+      "value": (maxY + minY) / 2
     }
   ];
 }
