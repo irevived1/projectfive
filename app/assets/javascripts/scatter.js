@@ -1,44 +1,3 @@
-<%= stylesheet_link_tag 'test' %>
-
-<div class="jumbotron">
-  <h1>New York, visualized</h1>
-  <hr class="m-y-2">
-  <p class="lead">Now comparing <select name="first" class="dropdown-toggle"></select> and <select name="second" class="dropdown-toggle"></select> in this dataset.</p>
-</div>
-<!--
-<div class="row">
-  <%= form_tag("/display", method: "post") do %>
-  <div id="form-select">
-      <%= text_field_tag(:term1) %>
-      <%= text_field_tag(:term2) %>
-      <%= submit_tag("Discover") %>
-    <% end %>
-  </div>
-</div> -->
-
-<div class="row" align="center">
-</div>
-
-<div class="row">
-  <div id="scatter-plot"></div>
-</div>
-
-<div class="row">
-  <div id="graphy">
-
-  </div>
-</div>
-
-
-<div id="numbers">
-
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.15.0/lodash.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tipsy/1.0.3/jquery.tipsy.min.js"></script>
-<<<<<<< HEAD
-
-<script type="text/javascript">
 var keys = [
   "zipcode",
   "graffiti_complaints",
@@ -49,6 +8,8 @@ var keys = [
   "streetlight_complaints",
   "amount_of_trees"
 ]
+
+//populates dropdown. wishlist -- change keys to load from an activerecord var?
 keys.forEach(function (key, index) {
   $('select').append("<option value=" + index + ">" + key + "</option>");
 })
@@ -59,10 +20,11 @@ var load = function (n1, n2) {
     url: "/assets/master.csv",
     dataType: "text",
     success: function(data) {
+      //array of hashes corresponding to each header
       parsedData = d3.csvParse(data);
+      //n1 and n2 are the dropdown options currently selected (0-7, here)
       firstData = Object.keys(parsedData[0])[n1];
       secondData = Object.keys(parsedData[0])[n2];
-      // debugger
       buildChart(parsedData, firstData, secondData);
       return data;
     }
@@ -70,8 +32,8 @@ var load = function (n1, n2) {
 }
 // data(5, 7);
 
+//here's your event listener!
 $('select').change(function () {
-  // debugger;
   d3.select('svg').remove();
   var first = $('select')[0].value;
   var second  = $('select')[1].value;
@@ -93,11 +55,10 @@ $('select').change(function () {
 // }
 
 function buildChart (dataset, firstData, secondData) {
-  // debugger;
   //COLORS for circles and triangles
   // template from: http://codepen.io/sasidhar2992/pen/jbgbwV
-  var firstColor = "rgb(158, 158, 158)";
-  var secondColor = "rgb(177, 177, 177)";
+  var firstColor = "#33A1FD";
+  var secondColor = "#FDCA40";
 
   //data object to hold parsed data
   var stagingData = [];
@@ -112,6 +73,8 @@ function buildChart (dataset, firstData, secondData) {
       stagingData.push(tempArray);
     }
   });
+
+  //stagingData is an array of arrays, the two values and the last being the zip (point of coincidence)
 
   //Create object with counted occurences
   var counts = _.countBy(stagingData);
@@ -237,7 +200,7 @@ function buildChart (dataset, firstData, secondData) {
     .attr("cy", function(d) {
       return y(parseInt(d[1]));
     })
-    .attr("opacity", .5)
+    .attr("opacity", .7)
     .style("fill", function(d) {
       if (d[0] > d[1]) {
 	return firstColor;
@@ -270,11 +233,13 @@ function buildChart (dataset, firstData, secondData) {
   svg.append("text")
     .attr("text-anchor", "middle")
     .attr("transform", "translate(300,580)")
+    .style('fill','#6395AA')
     .text(firstData);
 
   svg.append("text")
     .attr("text-anchor", "middle")
     .attr("transform", "translate(-30,300) rotate(-90)")
+    .style('fill', '#6395AA')
     .text(secondData);
 
   //Tipsy, to display the values
@@ -289,8 +254,3 @@ function buildChart (dataset, firstData, secondData) {
     }
   });
 }
-</script>
-<script src="https://d3js.org/d3.v4.min.js"></script>
-<!-- <%= javascript_include_tag "d3.v3.min.js" %> -->
-<%= javascript_include_tag 'scatter' %>
-<%= javascript_include_tag 'bargraph' %>
