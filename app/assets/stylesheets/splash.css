@@ -92,7 +92,6 @@ p {
 	font-size: 18px;
 }
 
-.hero-upload {
-	text-align: center;
+.hero-upload form {
 	margin: 0 auto;
 }

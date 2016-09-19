@@ -7,20 +7,14 @@
     <p>
       Get visualizations instantly, using your own data.
     </p>
-    <!-- <%= form_tag do %>
-    <input class=""btn btn-primary btn-block">
-    <%= file_field_tag :CSV %>
-    <%= submit_tag %>
-    <% end %> -->
-    <!-- <div class="row">
-      <div class="hero-upload">
-        <%= form_tag({:action => :homeUploadCSV}, multipart: true) do %> -->
-              <%= file_field_tag :file, class: "col-md-2 marginTop5", style: "color:black;" %>
-              <%= submit_tag( "Import", class: "col-md-1 btn btn-sm btn-brown") %>
-          <% end %>
-      <!-- </div>
-      </div> -->
+
   </div>
+  <div class="hero-upload container" style="text-align: center;">
+    <%= form_tag({:action => :homeUploadCSV}, multipart: true) do %>
+    <%= file_field_tag :file, class: "col-md-2 marginTop5", style: "color:black;" %>
+    <%= submit_tag( "Import", class: "col-md-1 btn btn-sm btn-brown") %>
+    <% end %>
+</div>
   <hr>
   <div class="row">
     <h2>Option 2: See a sample visualization page</h2>
