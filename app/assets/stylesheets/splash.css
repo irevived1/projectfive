@@ -122,10 +122,18 @@ p {
 	width: 100%;
 }
 
+.link-thumb {
+	display: inline-block;
+}
+
 .nav-away .btn {
 	background-color: #5D2E46;
   border-color: #5D2E46;
 	margin: 0 auto;
 	max-width: 600px;
 
+}
+
+.link-container {
+	margin-left: 300px;
 }
