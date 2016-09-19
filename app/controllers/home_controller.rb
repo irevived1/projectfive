@@ -1,6 +1,6 @@
 require 'csv'
 class HomeController < ApplicationController
-  before_action :getfile, only: [:drawLineChart, :uploadCSVFile]
+  before_action :getfile, only: [:drawLineChart, :uploadCSVFile, :homeUploadCSV]
 
   @@FileDataCache = FileDataCache.instance
 
@@ -46,6 +46,26 @@ class HomeController < ApplicationController
         f.write(csv_text)
       end
       render :linechart
+    end
+  end
+
+  def homeUploadCSV
+    if @file
+    csv_text = File.read(@file.path)
+      @file_data = CSV.parse(csv_text, :headers => true)
+
+      @headers = @file_data.headers.map.with_index do |h, i|
+        [h] if h.nil? == false && h.blank? == false && h.empty? == false && h != 'nil'
+      end
+
+      @@FileDataCache.file_data = @file_data
+      @@FileDataCache.filename = @file.original_filename
+      @@FileDataCache.headers = @headers
+
+      File.open("app/assets/csv/" + @file.original_filename, 'w+') do |f|
+        f.write(csv_text)
+      end
+      render :start
     end
   end
 

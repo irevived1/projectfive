@@ -12,6 +12,14 @@
     <%= file_field_tag :CSV %>
     <%= submit_tag %>
     <% end %> -->
+    <div>
+      <%= form_tag({:action => :homeUploadCSV}, multipart: true) do %>
+          <div class="row">
+            <%= file_field_tag :file, class: "col-md-2 marginTop5", style: "color:black;" %>
+            <%= submit_tag( "Import", class: "col-md-1 btn btn-sm btn-brown") %>
+          </div>
+        <% end %>
+      </div>
   </div>
   <hr>
   <div class="row">
