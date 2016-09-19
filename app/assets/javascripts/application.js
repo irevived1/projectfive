@@ -16,3 +16,4 @@
 //= require_tree ../../../vendor/assets/javascripts/.
 //= require_tree .
 //= require bootstrap.min.js
+//= require slippry.min.js
