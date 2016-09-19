@@ -40,7 +40,7 @@ function jump(h){
 
 $(function () {
   filename = $("#file").data("file");
-  $('h1#toptop').html((filename ? capitalizeEachWord(filename.replace(/_/g," ")) : "New York")+", visualized")
+  $('h1#toptop').html((filename ? capitalizeEachWord(filename.replace(/\.\w*/,"").replace(/_/g," ")) : "New York")+", visualized")
 
   $("header#myheader p").animate({
     "font-size":"1.8em"
@@ -56,6 +56,9 @@ $(function () {
     if (error) throw error;
     setglob(data);
     keys = Object.keys(data[0]);
+    // for (var i = 0, len = keys.length; i < len; i++) {
+    //   keys[i] = keys[i].replace(/ /g,"_");
+    // }
 
     //add options
     for (var i = 1, len = keys.length; i < len; i++) {
