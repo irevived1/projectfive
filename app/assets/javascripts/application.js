@@ -14,6 +14,6 @@
 //= require jquery_ujs
 //= require d3.v3.min
 //= require_tree ../../../vendor/assets/javascripts/.
-//= require slippry.min.js
 //= require_tree .
 //= require bootstrap.min.js
+//= require slippry.min.js
