@@ -4,9 +4,8 @@
 Rails.application.config.assets.version = '1.0'
 
 # For linechart initialization  -- begin
-Rails.application.config.assets.precompile += %w( abel.css )
-Rails.application.config.assets.precompile += %w( slippry.css )
-Rails.application.config.assets.precompile += %w( linechart.css )
+Rails.application.config.assets.precompile += %w( abel.css slippry.css linechart.css)
+Rails.application.config.assets.precompile += %w( linechart.js )
 require "#{Rails.root}/lib/UniPre.rb"
 require "#{Rails.root}/lib/FileDataCache.rb"
 # -- end
