@@ -1,5 +1,6 @@
 body {
 		padding-top: 70px;
+<<<<<<< HEAD
 		/*font-size: 16px;
 		font-family: "Arial",sans-serif;*/
     background-color: #FCFAF2;
@@ -18,18 +19,33 @@ body {
 }
 
 .landing h1 {
+=======
+		font-size: 16px;
+		font-family: "Open Sans",sans-serif;
+    background-color: #FCFAF2;
+}
+
+h1 {
+>>>>>>> upload-page
 	font-family: 'Abel', sans-serif;
 	font-weight: 400;
 	font-size: 50px;
+}
+
+h2 {
+	font-family: 'Abel', sans-serif;
+	font-weight: 400;
+	font-size: 35px;
+	padding-bottom: 13px;
 }
 
 p {
   font-size: 24px;
 }
 
-.margin-base-vertical {
+/*.margin-base-vertical {
 	margin: 70px 0;
-}
+}*/
 
 .landing {
     text-align: center;
@@ -44,8 +60,18 @@ p {
   margin: 0 auto;
 }
 
+<<<<<<< HEAD
 #bar-graphs {
   background-color: white;
+=======
+.icon-circ {
+  text-align: center;
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  padding: 20px;
+  background-color: #105D6D;
+>>>>>>> upload-page
 }
 
 .icon-div {
@@ -62,5 +88,12 @@ p {
   padding: 15px;
 }
 
-#scatter-plot {
+.hero-bar {
+	text-align: center;
+	background-color: #A53D2B;
+	color: #FCFAF2;
+}
+
+.hero-bar p {
+	  font-size: 18px;
 }

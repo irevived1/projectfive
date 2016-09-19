@@ -6,8 +6,8 @@ Rails.application.routes.draw do
 	get 'linechart' => 'home#linechart'
 	post 'linechart' => 'home#drawLineChart'
 	post 'uploadfile' => 'home#uploadCSVFile'
-  get 'chloropleth', to: "home#chloropleth"
   get 'splash', to: "home#splash"
+  get 'start', to: 'home#start'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
