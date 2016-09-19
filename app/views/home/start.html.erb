@@ -10,10 +10,20 @@
 
   </div>
   <div class="hero-upload container" style="text-align: center;">
+  <div class="row">
+  <!-- <div class="col-md-2"></div> -->
+  <!-- <div class="col-md-8"> -->
     <%= form_tag({:action => :homeUploadCSV}, multipart: true) do %>
-    <%= file_field_tag :file, class: "col-md-2 marginTop5", style: "color:black;" %>
-    <%= submit_tag( "Import", class: "col-md-1 btn btn-sm btn-brown") %>
+    <div class="row" style="margin-left:30px;">
+      <div class="col-md-4"></div>
+      <%= file_field_tag :file, class: "col-md-2 marginTop5", style: "color:black;" %>
+      <%= submit_tag( "Import", class: "col-md-1 btn btn-sm btn-brown") %>
+      <div class="col-md-4"></div>
+      </div>
     <% end %>
+    <!-- </div> -->
+    <!-- <div class="col-md-2"></div> -->
+    </div>
 </div>
   <hr>
   <div class="row">
