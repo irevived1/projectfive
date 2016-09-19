@@ -38,6 +38,10 @@ function jump(h){
 }
 
 $(function () {
+
+  $("header#myheader p").animate({
+    "font-size":"1.8em"
+  },1000);
   d3.csv("/assets/master.csv", function(error, data) {
     if (error) throw error;
     setglob(data);
@@ -57,9 +61,9 @@ $(function () {
   if (shrink) {
     // $("header#myheader ul").wrap("<li></li>");
     $("header#myheader").animate({
-      "textAlign":"left",
       "font-size":"1em"
     },1000);
+    // "textAlign":"left",
     // $("header#myheader").css({"textAlign":"left"});
 
     $('#floatingbottom').append('<a class="myanchors" onclick="return false" href="#toptop"> <img src="/assets/toptop" alt="Back to Top"/> </a>');

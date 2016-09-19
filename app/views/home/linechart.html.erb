@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <title>nvd3 linechart</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    
+
+
     <link rel='stylesheet prefetch' href='http://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.1/nv.d3.css'>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <%= stylesheet_link_tag 'abel.css' %>
@@ -28,7 +28,7 @@
               <div class="col-md-4">
               <h2>Prediction Line Chart</h3><br>
               <p>This line chart shows the relationship between two related features. It can be used to predict the value of y from the value of x. It reads a dataset, and, by implementing a normal equation, predicts the reasonable value of y based on the dataset. Also, you can upload your own CSV dataset. For calculation, I use the Ruby classes Matrix, Vector, and Rational.</p>
-                <img src="assets/prediction_l.svg" alt="Prediction" width="330px" height="300px"> 
+                <img src="assets/prediction_l.svg" alt="Prediction" width="330px" height="300px">
               </div><!-- Heading -->
 
 
@@ -52,13 +52,13 @@
       <!-- </div> -->
     </div>
   </section>
-  
+
   <section class="section" id="chartview" >
   <div class="container-fluid half" >
-    
+
     <br>
     <div class="container marginTop20" >
-      
+
       <br><br><br>
       <div id="theta" data-theta="<%= @theta %>"></div>
       <div id="term1" data-first="<%= @term1 %>"></div>
@@ -89,11 +89,11 @@
         </div>
         </div>
       </div>
-    
+
       <br>
 
       <br>
-    
+
       <div class="row">
         <div id="chart" class="col-md-9 linechart">
           <% if @theta %>
@@ -106,10 +106,10 @@
         </div>
       </div>
     </div>
-    
+
   </div>
 
-  
+
 </section>
 
 
