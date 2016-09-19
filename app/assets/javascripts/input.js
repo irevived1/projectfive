@@ -61,7 +61,10 @@ $(function () {
       "font-size":"1em"
     },1000);
     $("header#myheader").css({"textAlign":"left"});
+
+    $('#floatingbottom').append('<a class="myanchors" onclick="return false" href="#toptop"> <img src="/assets/toptop" alt="Back to Top"/> </a>');
     // $("header#myheader").animate(function() { $("header#myheader").css({"textAlign":"left"})},1000);
+
     shrink = false;
   }
 
@@ -95,7 +98,7 @@ $(function () {
     var value=graphytitle;
     var name_of_column = value.replace(/_/g," ");
     firstptag.append('<h2 class="graphytitle" id="' + graphytitle + typeofsort + '">' + name_of_column.toUpperCase() + ' SORT BY ' + typeofsort.toUpperCase() + '</h3>');
-    firstptag.append('<a class="myanchors" onclick="return false" href="#toptop"> <img src="/assets/toptop" alt="Back to Top"/> </a>');
+    // firstptag.append('<a class="myanchors" onclick="return false" href="#toptop"> <img src="/assets/toptop" alt="Back to Top"/> </a>');
     firstptag.append('<h3>' + keys[0].toUpperCase() + '</h3>');
 
     var mediawidnowlength = $(window).width();
