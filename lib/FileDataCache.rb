@@ -33,6 +33,14 @@ class FileDataCache
     @headers
   end
 
+  def hideAbout
+    @hideAbout
+  end
+
+  def hideAbout=(flag)
+    @hideAbout = flag
+  end
+
   def destroy
     @file_data = nil
     @filename = nil
