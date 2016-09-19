@@ -4,7 +4,7 @@ var filename = $("#file").data("file");
 
 if (filename !== "") {
   url = "/assets/" + filename; 
-  $('.jumbotron h1').html(capitalizeEachWord(filename.replace(/_/g," ")) + ", visualized");
+  $('.jumbotron h1').html(capitalizeEachWord(filename.replace(/\.\w*/,"").replace(/_/g," ")) + ", visualized");
 } else {
   url = "/assets/master.csv";
 }
@@ -69,8 +69,12 @@ function buildChart (dataset, firstData, secondData) {
     var tempArray = []; 
     if (entry !== undefined) {
       tempArray.push(entry[firstData]);
-      tempArray.push(entry[secondData]);
-      tempArray.push(entry.zipcode); 
+      tempArray.push(entry[secondData]); 
+      // if (entry.zipcode !== undefined) {
+	tempArray.push(entry.zipcode); 
+      // } else {
+	// tempArray.push(entry.Date);
+      // }
       stagingData.push(tempArray);
     } 
   }); 
@@ -91,8 +95,15 @@ function buildChart (dataset, firstData, secondData) {
     var result = key.split(",");
     var tempArray = [];
     tempArray.push(parseInt(result[0]));
-    tempArray.push(parseInt(result[1]));
-    tempArray.push(parseInt(result[2])); 
+    // tempArray.push(parseInt(result[1]));
+    // debugger;
+    if (result[2] === "") {
+      tempArray.push(parseInt(result[1]));
+      tempArray.push(result[1]); 
+    } else {
+      tempArray.push(parseInt(result[1]));
+      tempArray.push(parseInt(result[2]));
+    }
     // console.log(tempArray);
     data.push(tempArray);
   });
@@ -230,9 +241,12 @@ function buildChart (dataset, firstData, secondData) {
      html: true,
      trigger: 'focus',
      title: function() {
-       d = this.__data__;
+       d = this.__data__; 
        return capitalizeEachWord(firstData.replace(/_/g," ")) + ": " + d[0] + "<br>" + capitalizeEachWord(secondData.replace(/_/g," ")) + ": " + d[1] + "<br>" + capitalizeEachWord(keys[0].replace(/_/g," ")) + ": " + d[2] +"<br/>"
      }
    });
-
+   $('.dot').click(function (event) {  
+     alert('called');
+     $('#tipsy').appendTo('#tipsy-text');
+    })
 }
