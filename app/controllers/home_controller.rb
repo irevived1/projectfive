@@ -94,7 +94,7 @@ class HomeController < ApplicationController
   end
 
   def start
-    @filename = @@FileDataCache.destroy
+    @@FileDataCache.destroy
     render 'start'
   end
 
