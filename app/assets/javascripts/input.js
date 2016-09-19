@@ -42,6 +42,13 @@ $(function () {
   $("header#myheader p").animate({
     "font-size":"1.8em"
   },1000);
+
+  $("button").animate({
+    "font-size":"1em"
+  },1000);
+  $("input").animate({
+    "font-size":"1em"
+  },1000);
   d3.csv("/assets/master.csv", function(error, data) {
     if (error) throw error;
     setglob(data);
