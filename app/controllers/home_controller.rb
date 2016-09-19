@@ -5,6 +5,7 @@ class HomeController < ApplicationController
   @@FileDataCache = FileDataCache.instance
 
   def index
+    @@FileDataCache.filename
   end
 
   def display
@@ -51,7 +52,7 @@ class HomeController < ApplicationController
 
   def homeUploadCSV
     if @file
-    csv_text = File.read(@file.path)
+      csv_text = File.read(@file.path)
       @file_data = CSV.parse(csv_text, :headers => true)
 
       @headers = @file_data.headers.map.with_index do |h, i|
@@ -96,6 +97,7 @@ class HomeController < ApplicationController
   end
 
   def bargraph
+    @@FileDataCache.filename
     render 'bargraph'
   end  
 
