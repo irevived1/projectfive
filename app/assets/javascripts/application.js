@@ -14,7 +14,5 @@
 //= require jquery_ujs
 //= require d3.v3.min
 //= require_tree ../../../vendor/assets/javascripts/.
-//= require linechart/linechartImp.js
-//= require linechart/linechartShow.js
 //= require_tree .
 //= require bootstrap.min.js

@@ -11,9 +11,9 @@ body {
   height: 400px;
 }
 
-.bg-yellow {
-	background-color: #FFF3E0 !important;
-}
+/*.bg-yellow {
+	background-color: #fcfaf2 !important;
+}*/
 
 .marginTop5 {
 	margin-top: 5px;
@@ -45,9 +45,9 @@ body {
 	display: none;
 }
 
-.bg-blue {
-  background-color: #609cec !important;
-}
+/*.bg-blue {
+  background-color: #fcfaf2 !important;
+}*/
 
 
 .arrow {
