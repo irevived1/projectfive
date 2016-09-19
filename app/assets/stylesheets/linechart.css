@@ -4,6 +4,7 @@ body {
 	font-size: 13px;
 	line-height: 23px;
 	font-family: 'Open Sans', sans-serif;
+  font-size: 13px;
 	-webkit-font-smoothing: antialiased;
 }
 
@@ -21,7 +22,9 @@ body {
 .marginTop20 {
 	margin-top: 20px;
 }
-
+.marginLeft20 {
+  margin-left: 150px;
+}
 .btn.btn-brown {
 	background: #d08166;
 	color: #ffffff;
@@ -35,9 +38,14 @@ body {
 	color: #ffffff;
 }
 
+
 #aboutview .bg {
-  background-color: #1E88E5 !important;
+  background-color: #A53D2B !important;
   background-size: cover;
+}
+
+select {
+  color: black;
 }
 
 
