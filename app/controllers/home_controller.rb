@@ -4,6 +4,10 @@ class HomeController < ApplicationController
 
   @@FileDataCache = FileDataCache.instance
 
+  def bargraph
+    @filename = @@FileDataCache.filename
+    render 'bargraph'
+  end  
   def index
     @filename = @@FileDataCache.filename
   end

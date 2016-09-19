@@ -1,6 +1,7 @@
 var data = undefined;
 var shrink = true;
 var keys = undefined;
+var filename = undefined;
 
 function shiftvalue(input,max) {
   // var length = count_digit(input);
@@ -38,8 +39,7 @@ function jump(h){
 }
 
 $(function () {
-  var filename = $("#file").data("file");
-  
+  filename = $("#file").data("file");
   $('h1#toptop').html((filename ? capitalizeEachWord(filename.replace(/_/g," ")) : "New York")+", visualized")
 
   $("header#myheader p").animate({
