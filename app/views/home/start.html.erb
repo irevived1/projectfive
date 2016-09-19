@@ -16,7 +16,7 @@
     <%= form_tag({:action => :homeUploadCSV}, multipart: true) do %>
     <div class="row" style="margin-left:30px;">
       <div class="col-md-4"></div>
-      <%= file_field_tag :file, class: "col-md-2", style: "color:black;margin-top:8px;" %>
+      <%= file_field_tag :file, class: "col-md-2", style: "color:white;margin-top:8px;" %>
       <%= submit_tag( "Import", class: "col-md-1 btn btn-sm btn-brown") %>
       <div class="col-md-4"></div>
       </div>
@@ -36,13 +36,13 @@
 </div>
 
 <div class="row">
-</div class="link-list">
+<div class="link-list">
 
 <% if @file %>
 
 <h2>Your graph links</h2>
 
-<p><%= link_to 'Bargraph', bargraph_path %></p>
+<p><%= link_to 'Bar Graph', bargraph_path %></p>
 <p> <%= link_to 'Scatter plot', home_index_path %> </p>
 <p> <%= link_to 'Line chart', linechart_path %> </p>
 
