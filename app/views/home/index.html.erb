@@ -25,19 +25,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tipsy/1.0.3/jquery.tipsy.min.js"></script>
 
 <script type="text/javascript">
-var keys = [
-  "zipcode", 
-  "graffiti_complaints", 
-  "heating_complaints", 
-  "illegal_parking_complaints", 
-  "noise_complaints", 
-  "restaurant_average_score", 
-  "streetlight_complaints",
-  "amount_of_trees"
-]
-keys.forEach(function (key, index) {
-  $('select').append("<option value=" + index + ">" + key + "</option>");
-})
+var keys;
+//var keys = [
+//  "zipcode", 
+//  "graffiti_complaints", 
+//  "heating_complaints", 
+//  "illegal_parking_complaints", 
+//  "noise_complaints", 
+//  "restaurant_average_score", 
+//  "streetlight_complaints",
+//  "amount_of_trees"
+//]
+//keys.forEach(function (key, index) {
+//  $('select').append("<option value=" + index + ">" + key + "</option>");
+//})
 
 var load = function (n1, n2) {  
   $.ajax({
@@ -48,7 +49,13 @@ var load = function (n1, n2) {
       parsedData = d3.csvParse(data);   
       firstData = Object.keys(parsedData[0])[n1];
       secondData = Object.keys(parsedData[0])[n2];
+      keys = Object.keys(parsedData[0]);
       // debugger
+      if (keys.length > $('select')[0].children.length ) {
+        keys.forEach(function (key, index) {
+          $('select').append("<option value=" + index + ">" + key + "</option>");
+        })
+      }
       buildChart(parsedData, firstData, secondData);
       return data;
     }
@@ -63,7 +70,7 @@ $('select').change(function () {
   var second  = $('select')[1].value;
   load(first, second);
 })
-
+load(0,0);
 // function getSecondDataSet (firstDataset) {
 //   $.ajax({
 //     type: "GET",
