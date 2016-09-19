@@ -1,7 +1,7 @@
 body {
 		padding-top: 70px;
-		font-size: 16px;
-		font-family: "Arial",sans-serif;
+		/*font-size: 16px;
+		font-family: "Arial",sans-serif;*/
     background-color: #FCFAF2;
 }
 
@@ -17,7 +17,7 @@ body {
 	fill: #6395AA;
 }
 
-h1 {
+.landing h1 {
 	font-family: 'Abel', sans-serif;
 	font-weight: 400;
 	font-size: 50px;
@@ -36,7 +36,7 @@ p {
     color: #632B1F;
 }
 
-.btn {
+.landing .btn {
   background-color: #5D2E46;
   border-color: #5D2E46;
   font-size: 15px;
@@ -46,15 +46,6 @@ p {
 
 #bar-graphs {
   background-color: white;
-}
-
-.icon-circ {
-  text-align: center;
-  height: 100px;
-  width: 100px;
-  border-radius: 50%;
-  padding: 20px;
-  background-color: #105D6D;
 }
 
 .icon-div {
@@ -67,7 +58,7 @@ p {
   padding: 5px;
 }
 
-.row {
+.landing .row {
   padding: 15px;
 }
 
