@@ -71,4 +71,8 @@ class HomeController < ApplicationController
     render 'splash'
   end
 
+  def start
+    render 'start'
+  end 
+
 end
