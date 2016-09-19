@@ -26,12 +26,12 @@
 
 <script type="text/javascript">
 var keys = [
-  "zipcode", 
-  "graffiti_complaints", 
-  "heating_complaints", 
-  "illegal_parking_complaints", 
-  "noise_complaints", 
-  "restaurant_average_score", 
+  "zipcode",
+  "graffiti_complaints",
+  "heating_complaints",
+  "illegal_parking_complaints",
+  "noise_complaints",
+  "restaurant_average_score",
   "streetlight_complaints",
   "amount_of_trees"
 ]
@@ -39,13 +39,13 @@ keys.forEach(function (key, index) {
   $('select').append("<option value=" + index + ">" + key + "</option>");
 })
 
-var load = function (n1, n2) {  
+var load = function (n1, n2) {
   $.ajax({
     type: "GET",
     url: "/assets/master.csv",
     dataType: "text",
-    success: function(data) {  
-      parsedData = d3.csvParse(data);   
+    success: function(data) {
+      parsedData = d3.csvParse(data);
       firstData = Object.keys(parsedData[0])[n1];
       secondData = Object.keys(parsedData[0])[n2];
       // debugger
@@ -69,9 +69,9 @@ $('select').change(function () {
 //     type: "GET",
 //     url: "/assets/noise_complaints.csv",
 //     dataType: "text",
-//     success: function(data) { 
+//     success: function(data) {
 //       debugger;
-//       parsedData = d3.csvParse(data); 
+//       parsedData = d3.csvParse(data);
 //       buildChart(firstDataset, parsedData);
 //       return data;
 //     }
@@ -83,21 +83,21 @@ function buildChart (dataset, firstData, secondData) {
   //COLORS for circles and triangles
   // template from: http://codepen.io/sasidhar2992/pen/jbgbwV
   var firstColor = "rgb(158, 158, 158)";
-  var secondColor = "rgb(177, 177, 177)"; 
+  var secondColor = "rgb(177, 177, 177)";
 
   //data object to hold parsed data
   var stagingData = [];
 
   //parse the sample data into the data object D3 expects
-  dataset.forEach(function(entry) { 
-    var tempArray = []; 
+  dataset.forEach(function(entry) {
+    var tempArray = [];
     if (entry !== undefined) {
       tempArray.push(entry[firstData]);
       tempArray.push(entry[secondData]);
-      tempArray.push(entry.zipcode); 
+      tempArray.push(entry.zipcode);
       stagingData.push(tempArray);
-    } 
-  }); 
+    }
+  });
 
   //Create object with counted occurences
   var counts = _.countBy(stagingData);
@@ -116,11 +116,11 @@ function buildChart (dataset, firstData, secondData) {
     var tempArray = [];
     tempArray.push(parseInt(result[0]));
     tempArray.push(parseInt(result[1]));
-    tempArray.push(parseInt(result[2])); 
+    tempArray.push(parseInt(result[2]));
     // console.log(tempArray);
     data.push(tempArray);
   });
-  
+
 
   //Dimensions
   var margin = {
@@ -160,7 +160,7 @@ function buildChart (dataset, firstData, secondData) {
   //Set X range and domain
     var x = d3.scaleLinear()
       .range([0, width])
-      .domain([minX, maxX]); 
+      .domain([minX, maxX]);
   //Set Y range and domain
     var y = d3.scaleLinear()
       .range([height, 0])
@@ -196,7 +196,7 @@ function buildChart (dataset, firstData, secondData) {
       .attr('id', "axis--x")
       .attr("transform", "translate(" + minX + "," + height + ")")
       .call(xAxis);
-    
+
     svg.append("g")
       .attr("class", "y axis")
       .attr('id', "axis--y")
@@ -250,7 +250,7 @@ function buildChart (dataset, firstData, secondData) {
   // .attr("stroke-width", 1)
   // .attr("stroke", "silver");
 
-  var col1 = Object.keys(dataset[0])[1]; 
+  var col1 = Object.keys(dataset[0])[1];
   var col2 = Object.keys(dataset[0])[1];
   //Draw the labels
   svg.append("text")
@@ -273,6 +273,6 @@ function buildChart (dataset, firstData, secondData) {
       d = this.__data__;
       return firstData + ": " + d[0] + "<br>" + secondData + ": " + d[1] + "<br>zipcode: " + d[2] +"<br/>"
     }
-  }); 
+  });
 }
 </script>
