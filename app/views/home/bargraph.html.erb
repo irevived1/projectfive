@@ -3,7 +3,7 @@
 <header id="myheader" class="jumbotron">
   <h1 id="toptop" style="font-size: 3.2em">New York, visualized</h1>
   <hr class="m-y-2"/>
-  <p>Please choose your graph options:
+  <p>Please choose your graph options: </p>
 
   <%# for (var prop in window.restaurant_average_score) { %>
     <%#   tmp = {}; %>
@@ -29,7 +29,6 @@
       <button type="submit" form="form1" value="Submit">Click Me!</button>
       <%= button_to "Refresh",  { controller: "home",action: "bargraph"}, method: :get, data: { confirm: "All your fancy graphs will be gone! Are you sure?" } %>
     </form>
-    </p>
   </header>
 
 
