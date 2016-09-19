@@ -28,7 +28,7 @@
           <%# <option value="value">Sort by Value</option> %>
         </select>
         <button type="submit" form="form1" value="Submit" class="btn btn-primary">Click Me!</button>
-        <%= button_to "Refresh", { controller: "home",action: "bargraph"}, method: :get,  data: { confirm: "All your fancy graphs will be gone! Are you sure?" } %>
+        <%= button_to "Refresh", { controller: "home",action: "bargraph" }, class:"btn btn-primary",  method: :get,  data: { confirm: "All your fancy graphs will be gone! Are you sure?" } %>
       </form>
     </div>
   </header>
