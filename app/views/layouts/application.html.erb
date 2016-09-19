@@ -5,15 +5,20 @@
     <%= csrf_meta_tags %>
 
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://use.fontawesome.com/8620a740d7.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Abel|Open+Sans" rel="stylesheet">
     <%= stylesheet_link_tag 'application' %>
+    <%= stylesheet_link_tag 'bootstrap.min.css' %>
+
 
 
     <script src="https://d3js.org/d3.v4.min.js"></script>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.5.1/math.min.js" type="text/css">
+    <link rel='stylesheet prefetch' href='http://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.1/nv.d3.css'>
 
   </head>
-
+  
   <body>
     <%= yield %>
   </body>

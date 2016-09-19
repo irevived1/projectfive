@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>nvd3 linechart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <link rel='stylesheet prefetch' href='http://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.1/nv.d3.css'>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <%= stylesheet_link_tag 'abel.css' %>
+    <%= stylesheet_link_tag 'slippry.css' %>
+    <%= stylesheet_link_tag 'linechart.css' %>
+  </head>
+
+  <body style="background-color: #fcfaf2;color: white;">
+  <br>
+
+  <section class="section <%= "hide" if FileDataCache.instance.file_data %>" id="aboutview">
+    <div class="container-fluid bg" >
+      <!-- <div class="row"> -->
+      <div class="container marginTop20">
+        <!-- Item -->
+          <div class="ui-item clearfix bg-lblue">
+            <div class="row">
+              <!-- Heading -->
+              <div class="col-md-4">
+              <h2>Prediction Line Chart</h3><br>
+              <p>This line chart shows the relationship between two related features. It can be used to predict the value of y from the value of x. It reads a dataset, and, by implementing a normal equation, predicts the reasonable value of y based on the dataset. Also, you can upload your own CSV dataset. For calculation, I use the Ruby classes Matrix, Vector, and Rational.</p>
+                <img src="assets/prediction_l.svg" alt="Prediction" width="330px" height="300px"> 
+              </div><!-- Heading -->
+
+
+              <div class="col-md-8">
+                <br><br><br><br>
+                <ul>
+                  <li>
+                    <h4>Algorithm Selection</h4>
+                    <p>I use a normal equation to calculate the reasonable y from x based on a dataset. I tried to implement a regression eqution with a descent function, but, in Ruby, it is difficult to implement the complex functions. Using a normal equation is not the best approach for prediction, but, in Ruby, it is efficient on big datasets and I do not need to iterate the datasets. I found several Ruby classes(Matrix, Vector, Rational) which helps me to implement the equation. I wrote a class UniPre.rb which takes two arrays(x, y) which must be in the same order and gives you a optimal value(T) for prediction.</p>
+                    <img src="assets/equation.png" alt="Equation" width="150px" height="40px">     (X is the x values of samples. y is the y values of samples.)
+                  </li>
+                  <li>
+                    <h4>Model Selection</h4>
+                    <p>A good model will give you a good prediction result. The two features(x, y) must have a linear relationship between them, because the equation is a linear equation. </p>
+                  </li>
+                </ul>
+              </div><!-- Content -->
+            </div><!-- row -->
+          </div>
+      </div>
+      <!-- </div> -->
+    </div>
+  </section>
+  
+  <section class="section" id="chartview" >
+  <div class="container-fluid half" >
+    
+    <br>
+    <div class="container marginTop20" >
+      
+      <br><br><br>
+      <div id="theta" data-theta="<%= @theta %>"></div>
+      <div id="term1" data-first="<%= @term1 %>"></div>
+      <div id="term2" data-second="<%= @term2 %>"></div>
+      <div id="file" data-file="<%= @filename %>"></div>
+
+      <div class="row">
+        <div class="col-md-1"><span style="margin-left: 20px;"><a class="arrow arrow-left" title="Home Page" href="/"></a></span></div>
+
+        <div class="col-md-11" style="margin-top: 15px;">
+        <%= form_tag({:action => :uploadCSVFile}, multipart: true) do %>
+          <div class="row">
+            <%= file_field_tag :file, class: "col-md-2 marginTop5", style: "color:black;" %>
+            <%= submit_tag( "Import", class: "col-md-1 btn btn-sm btn-brown") %>
+          </div>
+        <% end %>
+<!--         <input id="fileSelect" type="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" /> -->
+        <br>
+        <div class="<%= "hide" if !FileDataCache.instance.file_data %>">
+
+          <%= form_tag("/linechart", id: "linechart", method: "post") do %>
+              <label>x:</label>
+              <%= select_tag(:term1, options_for_select(@headers || []))%>
+              <label>y:</label>
+              <%= select_tag(:term2, options_for_select(@headers || []))%>
+            <%= submit_tag("Predict", class: "btn btn-sm btn-brown") %>
+          <% end %>
+        </div>
+        </div>
+      </div>
+    
+      <br>
+
+      <br>
+    
+      <div class="row">
+        <div id="chart" class="col-md-9 linechart">
+          <% if @theta %>
+            <h3 align="center">T: <%= @theta %></h3>
+          <% end %>
+          <svg></svg>
+        </div>
+        <div id="donut-chart" class="col-md-3">
+          <svg id="chartsvg"></svg>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  
+</section>
+
+
+
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.js'></script>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.1/nv.d3.js'></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <%= javascript_include_tag 'linechart' %>
+  </body>
+</html>
