@@ -11,7 +11,7 @@
 
 header#myheader {
     text-align: center;
-    font-size: 3em;
+    font-size: 1.5em;
     width: 100%;       /* use something sensible as the default value */
 }
 
