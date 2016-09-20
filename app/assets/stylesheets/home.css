@@ -19,10 +19,10 @@ body {
   font: 10px sans-serif;
 }
 
-.bar rect {
-  fill: #33A1FD;
+/* .bar rect { */
+  /* fill: #33A1FD; */
   /* fill: #FDCA40 */
-}
+/* } */
 
 .bar text.value {
   fill: black;

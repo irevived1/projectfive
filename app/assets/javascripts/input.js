@@ -155,6 +155,10 @@ $(function () {
     x.domain([0, max]);
     y.domain(data.map(function(d) { return d[zipcode]; }));
 
+    var pcolor = d3.scale.linear()
+      .domain([0,w])
+      .range(['#FDCA40','#33A1FD']);
+
     var bar = svg.selectAll("g.bar")
         .data(data)
       .enter().append("g")
@@ -162,6 +166,7 @@ $(function () {
         .attr("transform", function(d) { return "translate(0," + y(d[zipcode]) + ")"; });
 
     bar.append("rect")
+        .attr('fill', function(d) {return pcolor(d[value]);} )
         .attr("width", function(d) { return x(d[value]); })
         .attr("height", y.rangeBand());
 
