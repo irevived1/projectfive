@@ -156,7 +156,7 @@ $(function () {
     y.domain(data.map(function(d) { return d[zipcode]; }));
 
     var pcolor = d3.scale.linear()
-      .domain([0,w])
+      .domain([0,max])
       .range(['#FDCA40','#33A1FD']);
 
     var bar = svg.selectAll("g.bar")
