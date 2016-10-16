@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20160915213544) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "restaurants", force: :cascade do |t|
     t.integer  "zip"
     t.integer  "avg_score"
